@@ -24,6 +24,7 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 
 			@Override
 			public void handle(final KeyEvent event) {
+				System.out.println(event.getCharacter()); // FIXME Test code!
 
 				if (event.getEventType().equals(KeyEvent.KEY_PRESSED)) {
 					if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.W) {
