@@ -2,10 +2,10 @@ package engine;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import objects.GameObject;
 import objects.Protagonist;
@@ -50,8 +50,10 @@ public class Engine extends Application {
 
 	private Scene setupScene() {
 		setupCanvas();
-		Group group = new Group(canvas);
-		return new Scene(group, World.WIDTH, World.HEIGHT);
+		Pane pane = new Pane();
+		pane.setStyle(" -fx-background-color: black");
+		pane.getChildren().add(canvas);
+		return new Scene(pane, World.WIDTH, World.HEIGHT);
 	}
 
 	private void setupCanvas() {
@@ -70,6 +72,7 @@ public class Engine extends Application {
 						((Tickable) object).tick();
 					}
 					if (object instanceof Drawable) {
+						graphicalContext.clearRect(0, 0, World.WIDTH, World.HEIGHT);
 						((Drawable) object).draw(graphicalContext);
 					}
 				}
