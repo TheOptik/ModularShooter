@@ -52,7 +52,7 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 
 	}
 
-	public EventHandler<KeyEvent> getEventHandler() {
+	public EventHandler<KeyEvent> getKeyBinding() {
 		return keyBinding;
 	}
 
