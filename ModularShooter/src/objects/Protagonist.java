@@ -15,6 +15,8 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 	private final EventHandler<KeyEvent> keyPressed;
 	private final EventHandler<KeyEvent> keyReleased;
 
+	private boolean moving = false;
+
 	public Protagonist() {
 
 		this.xCoordinate = World.WIDTH / 2;
@@ -27,15 +29,19 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 			public void handle(final KeyEvent event) {
 				if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.W) {
 					Protagonist.this.velocity.yVelocity = -1;
+					moving = true;
 				}
 				if (event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.S) {
 					Protagonist.this.velocity.yVelocity = 1;
+					moving = true;
 				}
 				if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.A) {
 					Protagonist.this.velocity.xVelocity = -1;
+					moving = true;
 				}
 				if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) {
 					Protagonist.this.velocity.xVelocity = 1;
+					moving = true;
 				}
 				if (event.getCode() == KeyCode.SPACE) {
 					System.out.println("PEW!!");
@@ -47,7 +53,7 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 
 			@Override
 			public void handle(KeyEvent event) {
-				// TODO empty xP
+				moving = false;
 			}
 		};
 
@@ -56,15 +62,19 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 	@Override
 	public void draw(GraphicsContext graphicsContext) {
 		graphicsContext.setFill(new Color(0, 1, 0, 1));
-		graphicsContext.fillRect(xCoordinate, yCoordinate, 1, 1);
+		graphicsContext.fillRect(xCoordinate, yCoordinate, 5, 5);
 	}
 
 	@Override
 	public void tick() {
 
-		this.velocity.xVelocity *= 0.9;
-		this.velocity.yVelocity *= 0.9;
+		this.xCoordinate += velocity.xVelocity;
+		this.yCoordinate += velocity.yVelocity;
 
+		if (!moving) {
+			this.velocity.xVelocity *= 0.9;
+			this.velocity.yVelocity *= 0.9;
+		}
 	}
 
 	public EventHandler<KeyEvent> getKeyPressed() {
