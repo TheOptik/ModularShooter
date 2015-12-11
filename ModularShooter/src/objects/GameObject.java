@@ -6,6 +6,6 @@ public abstract class GameObject {
 
 	double xCoordinate;
 	double yCoordinate;
-	Velocity velocity;
+	protected Velocity velocity;
 
 }
