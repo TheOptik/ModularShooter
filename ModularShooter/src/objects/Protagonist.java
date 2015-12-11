@@ -12,7 +12,8 @@ import world.World;
 
 public class Protagonist extends GameObject implements Tickable, Drawable {
 
-	private final EventHandler<KeyEvent> keyBinding;
+	private final EventHandler<KeyEvent> keyPressed;
+	private final EventHandler<KeyEvent> keyReleased;
 
 	public Protagonist() {
 
@@ -20,41 +21,36 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 		this.yCoordinate = World.WIDTH / 2;
 		this.velocity = new Velocity(0, 0);
 
-		keyBinding = new EventHandler<KeyEvent>() {
+		keyPressed = new EventHandler<KeyEvent>() {
 
 			@Override
 			public void handle(final KeyEvent event) {
-				System.out.println(event.getCharacter()); // FIXME Test code!
-
-				if (event.getEventType().equals(KeyEvent.KEY_PRESSED)) {
-					if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.W) {
-						Protagonist.this.velocity.yVelocity = -1;
-					}
-					if (event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.S) {
-						Protagonist.this.velocity.yVelocity = 1;
-					}
-					if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.A) {
-						Protagonist.this.velocity.xVelocity = -1;
-					}
-					if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) {
-						Protagonist.this.velocity.xVelocity = 1;
-					}
-					if (event.getCode() == KeyCode.SPACE) {
-						System.out.println("PEW!!");
-					}
+				if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.W) {
+					Protagonist.this.velocity.yVelocity = -1;
 				}
-				if (event.getEventType().equals(KeyEvent.KEY_RELEASED)) {
-					// TODO haben wir hier was?
+				if (event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.S) {
+					Protagonist.this.velocity.yVelocity = 1;
 				}
-
+				if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.A) {
+					Protagonist.this.velocity.xVelocity = -1;
+				}
+				if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) {
+					Protagonist.this.velocity.xVelocity = 1;
+				}
+				if (event.getCode() == KeyCode.SPACE) {
+					System.out.println("PEW!!");
+				}
 			}
 
 		};
+		keyReleased = new EventHandler<KeyEvent>() {
 
-	}
+			@Override
+			public void handle(KeyEvent event) {
+				// TODO empty xP
+			}
+		};
 
-	public EventHandler<KeyEvent> getKeyBinding() {
-		return keyBinding;
 	}
 
 	@Override
@@ -69,6 +65,14 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 		this.velocity.xVelocity *= 0.9;
 		this.velocity.yVelocity *= 0.9;
 
+	}
+
+	public EventHandler<KeyEvent> getKeyPressed() {
+		return keyPressed;
+	}
+
+	public EventHandler<KeyEvent> getKeyReleased() {
+		return keyReleased;
 	}
 
 }
