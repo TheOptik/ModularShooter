@@ -2,13 +2,11 @@ package engine;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import objects.GameObject;
 import objects.Protagonist;
 import util.Drawable;
@@ -27,31 +25,37 @@ public class Engine extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		setupStage(primaryStage);
+		canvas.requestFocus();
 		setupAnimationTimer();
 
 		// TODO: auslagern!
-		World.OBJECTS.add(new Protagonist());
+		Protagonist protagonist = new Protagonist();
+		World.OBJECTS.add(protagonist);
+		canvas.setOnKeyTyped(protagonist.getKeyBinding());
 	}
 
 	private void setupStage(final Stage stage) {
 		stage.setTitle("Modular Shooter");
-		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			public void handle(final WindowEvent event) {
-				// TODO: Just in Case
-				event.consume();
-			}
-		});
+		/*
+		 * TODO: Just in Case stage.setOnCloseRequest(new
+		 * EventHandler<WindowEvent>() { public void handle(final WindowEvent
+		 * event) {
+		 * 
+		 * event.consume(); } });
+		 */
 		stage.setScene(setupScene());
+		stage.show();
 	}
 
 	private Scene setupScene() {
 		setupCanvas();
 		Group group = new Group(canvas);
-		return new Scene(group, 800, 800);
+		return new Scene(group, World.WIDTH, World.HEIGHT);
 	}
 
 	private void setupCanvas() {
-		canvas = new Canvas(800, 800);
+		canvas = new Canvas(World.WIDTH, World.HEIGHT);
+		canvas.setFocusTraversable(true);
 		graphicalContext = canvas.getGraphicsContext2D();
 	}
 
