@@ -53,7 +53,22 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 
 			@Override
 			public void handle(KeyEvent event) {
-				moving = false;
+				if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.W) {
+					Protagonist.this.velocity.yVelocity *= 0.9;
+					moving = false;
+				}
+				if (event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.S) {
+					Protagonist.this.velocity.yVelocity *= 0.9;
+					moving = false;
+				}
+				if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.A) {
+					Protagonist.this.velocity.xVelocity *= 0.9;
+					moving = false;
+				}
+				if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) {
+					Protagonist.this.velocity.xVelocity *= 0.9;
+					moving = false;
+				}
 			}
 		};
 
@@ -71,8 +86,10 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 		this.xCoordinate += velocity.xVelocity;
 		this.yCoordinate += velocity.yVelocity;
 
-		if (!moving) {
+		if (-1 < this.velocity.xVelocity && this.velocity.xVelocity < 1) {
 			this.velocity.xVelocity *= 0.9;
+		}
+		if (-1 < this.velocity.yVelocity && this.velocity.yVelocity < 1) {
 			this.velocity.yVelocity *= 0.9;
 		}
 	}
