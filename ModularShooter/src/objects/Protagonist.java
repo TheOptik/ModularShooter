@@ -15,7 +15,10 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 	private final EventHandler<KeyEvent> keyPressed;
 	private final EventHandler<KeyEvent> keyReleased;
 
-	private boolean moving = false;
+	private boolean right;
+	private boolean left;
+	private boolean up;
+	private boolean down;
 
 	public Protagonist() {
 
@@ -29,19 +32,19 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 			public void handle(final KeyEvent event) {
 				if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.W) {
 					Protagonist.this.velocity.yVelocity = -1;
-					moving = true;
+					up = true;
 				}
 				if (event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.S) {
 					Protagonist.this.velocity.yVelocity = 1;
-					moving = true;
+					down = true;
 				}
 				if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.A) {
 					Protagonist.this.velocity.xVelocity = -1;
-					moving = true;
+					left = true;
 				}
 				if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) {
 					Protagonist.this.velocity.xVelocity = 1;
-					moving = true;
+					right = true;
 				}
 				if (event.getCode() == KeyCode.SPACE) {
 					System.out.println("PEW!!");
@@ -55,19 +58,19 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 			public void handle(KeyEvent event) {
 				if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.W) {
 					Protagonist.this.velocity.yVelocity *= 0.9;
-					moving = false;
+					up = false;
 				}
 				if (event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.S) {
 					Protagonist.this.velocity.yVelocity *= 0.9;
-					moving = false;
+					down = false;
 				}
 				if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.A) {
 					Protagonist.this.velocity.xVelocity *= 0.9;
-					moving = false;
+					left = false;
 				}
 				if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) {
 					Protagonist.this.velocity.xVelocity *= 0.9;
-					moving = false;
+					right = false;
 				}
 			}
 		};
@@ -86,12 +89,25 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 		this.xCoordinate += velocity.xVelocity;
 		this.yCoordinate += velocity.yVelocity;
 
-		if (-1 < this.velocity.xVelocity && this.velocity.xVelocity < 1) {
+		if (!(left || right)) {
 			this.velocity.xVelocity *= 0.9;
 		}
-		if (-1 < this.velocity.yVelocity && this.velocity.yVelocity < 1) {
+		if (!(up || down)) {
 			this.velocity.yVelocity *= 0.9;
 		}
+		if (!left && right) {
+			this.velocity.xVelocity = 1;
+		}
+		if (!right && left) {
+			this.velocity.xVelocity = -1;
+		}
+		if (!up && down) {
+			this.velocity.yVelocity = 1;
+		}
+		if (!down && up) {
+			this.velocity.yVelocity = -1;
+		}
+
 	}
 
 	public EventHandler<KeyEvent> getKeyPressed() {
