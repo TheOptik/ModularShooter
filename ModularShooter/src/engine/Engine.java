@@ -31,7 +31,8 @@ public class Engine extends Application {
 		// TODO: auslagern!
 		Protagonist protagonist = new Protagonist();
 		World.OBJECTS.add(protagonist);
-		canvas.setOnKeyTyped(protagonist.getKeyBinding());
+		canvas.setOnKeyPressed(protagonist.getKeyPressed());
+		canvas.setOnKeyReleased(protagonist.getKeyReleased());
 	}
 
 	private void setupStage(final Stage stage) {
