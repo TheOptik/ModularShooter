@@ -37,11 +37,19 @@ public class BasicEnemy extends Enemy {
 		graphicsContext.setFill(Color.RED);
 		graphicsContext.fillRect(this.coordinates.xCoordinate, this.coordinates.yCoordinate, 5, 5);
 		if (boostParticles) {
-			World.OBJECTS
-					.add(new BoostParticle(this.coordinates.xCoordinate, this.coordinates.yCoordinate, this.velocity));
+
+			for (int i = 0; i < (int) (Math.random() * 10 + 1); i++) {
+				generateRandomBoostParticle();
+			}
+
 			boostParticles = false;
 		}
 
+	}
+
+	public void generateRandomBoostParticle() {
+		World.OBJECTS.add(new BoostParticle(this.coordinates.xCoordinate + (Math.random() - 0.5) * 2,
+				this.coordinates.yCoordinate + (Math.random() - 0.5) * 2, this.velocity));
 	}
 
 }
