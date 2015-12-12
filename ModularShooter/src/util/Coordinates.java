@@ -10,4 +10,9 @@ public class Coordinates {
 		this.yCoordinate = yCoordinate;
 	}
 
+	public void calculateMovement(Velocity velocity) {
+		this.xCoordinate += velocity.xVelocity;
+		this.yCoordinate += velocity.yVelocity;
+
+	}
 }
