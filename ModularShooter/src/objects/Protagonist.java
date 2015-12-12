@@ -22,8 +22,8 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 
 	public Protagonist() {
 
-		this.xCoordinate = World.WIDTH / 2;
-		this.yCoordinate = World.HEIGHT / 2;
+		this.coordinates.xCoordinate = World.WIDTH / 2;
+		this.coordinates.yCoordinate = World.HEIGHT / 2;
 		this.velocity = new Velocity(0, 0);
 
 		keyPressed = new EventHandler<KeyEvent>() {
@@ -80,14 +80,14 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 	@Override
 	public void draw(GraphicsContext graphicsContext) {
 		graphicsContext.setFill(new Color(0, 1, 0, 1));
-		graphicsContext.fillRect(xCoordinate, yCoordinate, 5, 5);
+		graphicsContext.fillRect(this.coordinates.xCoordinate, this.coordinates.yCoordinate, 5, 5);
 	}
 
 	@Override
 	public void tick() {
 
-		this.xCoordinate += velocity.xVelocity;
-		this.yCoordinate += velocity.yVelocity;
+		this.coordinates.xCoordinate += velocity.xVelocity;
+		this.coordinates.yCoordinate += velocity.yVelocity;
 
 		if (!(left || right)) {
 			this.velocity.xVelocity *= 0.9;

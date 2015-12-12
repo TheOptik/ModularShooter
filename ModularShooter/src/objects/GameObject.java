@@ -1,11 +1,11 @@
 package objects;
 
+import util.Coordinates;
 import util.Velocity;
 
 public abstract class GameObject {
 
-	double xCoordinate;
-	double yCoordinate;
+	Coordinates coordinates;
 	protected Velocity velocity;
 
 	protected double randomVelocity() {

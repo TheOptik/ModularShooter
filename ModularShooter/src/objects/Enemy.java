@@ -10,8 +10,8 @@ public abstract class Enemy extends GameObject implements Tickable, Drawable {
 	double health;
 
 	public Enemy(double xCoordinate, double yCoordinate) {
-		this.xCoordinate = xCoordinate;
-		this.yCoordinate = yCoordinate;
+		this.coordinates.xCoordinate = xCoordinate;
+		this.coordinates.yCoordinate = yCoordinate;
 		this.velocity = new Velocity(randomVelocity(), randomVelocity());
 	}
 
@@ -21,10 +21,10 @@ public abstract class Enemy extends GameObject implements Tickable, Drawable {
 
 	@Override
 	public void tick() {
-		if (this.xCoordinate > World.WIDTH || this.xCoordinate < 0) {
+		if (this.coordinates.xCoordinate > World.WIDTH || this.coordinates.xCoordinate < 0) {
 			World.OBJECTS.remove(this);
 		}
-		if (this.yCoordinate > World.HEIGHT || this.yCoordinate < 0) {
+		if (this.coordinates.yCoordinate > World.HEIGHT || this.coordinates.yCoordinate < 0) {
 			World.OBJECTS.remove(this);
 		}
 	}
