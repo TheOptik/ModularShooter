@@ -12,7 +12,7 @@ public class World {
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 800;
 	public static final Protagonist PROTAGONIST = new Protagonist();
-	public static final double spawnPercentage = 1;
+	public static final double spawnPercentage = 5;
 
 	public static final List<GameObject> OBJECTS = new ArrayList<GameObject>();
 

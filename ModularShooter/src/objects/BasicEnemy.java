@@ -40,7 +40,6 @@ public class BasicEnemy extends Enemy {
 
 			for (int i = 0; i < (int) (Math.random() * 10 + 1); i++) {
 				generateRandomBoostParticle();
-				System.out.println(i);
 			}
 
 			boostParticles = false;
