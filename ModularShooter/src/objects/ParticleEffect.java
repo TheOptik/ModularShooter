@@ -1,5 +1,6 @@
 package objects;
 
+import util.Coordinates;
 import util.Drawable;
 import util.Tickable;
 import world.World;
@@ -9,8 +10,7 @@ public abstract class ParticleEffect extends GameObject implements Drawable, Tic
 	protected int lifeSpan;
 
 	public ParticleEffect(double xCoordinate, double yCoordinate) {
-		this.coordinates.xCoordinate = xCoordinate;
-		this.coordinates.yCoordinate = yCoordinate;
+		this.coordinates = new Coordinates(xCoordinate, yCoordinate);
 		this.lifeSpan = (int) (60 * Math.random()) + 1;
 	}
 

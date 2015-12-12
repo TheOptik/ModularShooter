@@ -1,5 +1,6 @@
 package objects;
 
+import util.Coordinates;
 import util.Drawable;
 import util.Tickable;
 import util.Velocity;
@@ -10,8 +11,7 @@ public abstract class Enemy extends GameObject implements Tickable, Drawable {
 	double health;
 
 	public Enemy(double xCoordinate, double yCoordinate) {
-		this.coordinates.xCoordinate = xCoordinate;
-		this.coordinates.yCoordinate = yCoordinate;
+		this.coordinates = new Coordinates(xCoordinate, yCoordinate);
 		this.velocity = new Velocity(randomVelocity(), randomVelocity());
 	}
 

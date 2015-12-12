@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import util.Coordinates;
 import util.Drawable;
 import util.Tickable;
 import util.Velocity;
@@ -21,9 +22,7 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 	private boolean down;
 
 	public Protagonist() {
-
-		this.coordinates.xCoordinate = World.WIDTH / 2;
-		this.coordinates.yCoordinate = World.HEIGHT / 2;
+		this.coordinates = new Coordinates((World.WIDTH / 2), (World.HEIGHT / 2));
 		this.velocity = new Velocity(0, 0);
 
 		keyPressed = new EventHandler<KeyEvent>() {
