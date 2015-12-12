@@ -40,6 +40,7 @@ public class BasicEnemy extends Enemy {
 
 			for (int i = 0; i < (int) (Math.random() * 10 + 1); i++) {
 				generateRandomBoostParticle();
+				System.out.println(i);
 			}
 
 			boostParticles = false;
@@ -48,8 +49,8 @@ public class BasicEnemy extends Enemy {
 	}
 
 	public void generateRandomBoostParticle() {
-		World.OBJECTS.add(new BoostParticle(this.coordinates.xCoordinate + (Math.random() - 0.5) * 2,
-				this.coordinates.yCoordinate + (Math.random() - 0.5) * 2, this.velocity));
+		World.OBJECTS.add(new BoostParticle(this.coordinates.xCoordinate + (Math.random() - 0.5) * 15,
+				this.coordinates.yCoordinate + (Math.random() - 0.5) * 15, this.velocity));
 	}
 
 }
