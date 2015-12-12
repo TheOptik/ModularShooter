@@ -5,7 +5,7 @@ import util.Velocity;
 
 public abstract class GameObject {
 
-	Coordinates coordinates;
+	public Coordinates coordinates;
 	protected Velocity velocity;
 
 	protected double randomVelocity() {

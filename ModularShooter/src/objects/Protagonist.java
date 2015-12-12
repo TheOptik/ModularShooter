@@ -1,10 +1,14 @@
 package objects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import modules.Module;
 import util.Coordinates;
 import util.Drawable;
 import util.Tickable;
@@ -15,6 +19,7 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 
 	private final EventHandler<KeyEvent> keyPressed;
 	private final EventHandler<KeyEvent> keyReleased;
+	private static final List<Module> MODULES = new ArrayList<Module>();
 
 	private boolean right;
 	private boolean left;
@@ -80,6 +85,10 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 	public void draw(GraphicsContext graphicsContext) {
 		graphicsContext.setFill(new Color(0, 1, 0, 1));
 		graphicsContext.fillRect(this.coordinates.xCoordinate, this.coordinates.yCoordinate, 5, 5);
+
+		for (Module mod : Protagonist.MODULES) {
+			mod.draw(graphicsContext);
+		}
 	}
 
 	@Override
@@ -107,6 +116,10 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 			this.velocity.yVelocity = -1;
 		}
 
+		for (Module mod : Protagonist.MODULES) {
+			mod.tick();
+		}
+
 	}
 
 	public EventHandler<KeyEvent> getKeyPressed() {
@@ -115,6 +128,10 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 
 	public EventHandler<KeyEvent> getKeyReleased() {
 		return keyReleased;
+	}
+
+	public void addModule(Module module) {
+		Protagonist.MODULES.add(module);
 	}
 
 }
