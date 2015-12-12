@@ -23,7 +23,7 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 	public Protagonist() {
 
 		this.xCoordinate = World.WIDTH / 2;
-		this.yCoordinate = World.WIDTH / 2;
+		this.yCoordinate = World.HEIGHT / 2;
 		this.velocity = new Velocity(0, 0);
 
 		keyPressed = new EventHandler<KeyEvent>() {

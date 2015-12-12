@@ -8,4 +8,8 @@ public abstract class GameObject {
 	double yCoordinate;
 	protected Velocity velocity;
 
+	protected double randomVelocity() {
+		return (Math.random() - 0.5) * 2;
+	}
+
 }

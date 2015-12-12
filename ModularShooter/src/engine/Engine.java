@@ -1,5 +1,8 @@
 package engine;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -8,7 +11,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import objects.GameObject;
-import objects.Protagonist;
 import util.Drawable;
 import util.Tickable;
 import world.World;
@@ -29,10 +31,9 @@ public class Engine extends Application {
 		setupAnimationTimer();
 
 		// TODO: auslagern!
-		Protagonist protagonist = new Protagonist();
-		World.OBJECTS.add(protagonist);
-		canvas.setOnKeyPressed(protagonist.getKeyPressed());
-		canvas.setOnKeyReleased(protagonist.getKeyReleased());
+		World.OBJECTS.add(World.PROTAGONIST);
+		canvas.setOnKeyPressed(World.PROTAGONIST.getKeyPressed());
+		canvas.setOnKeyReleased(World.PROTAGONIST.getKeyReleased());
 	}
 
 	private void setupStage(final Stage stage) {
@@ -67,12 +68,17 @@ public class Engine extends Application {
 
 			@Override
 			public void handle(long now) {
-				for (GameObject object : World.OBJECTS) {
+
+				World.trySpawning();
+				graphicalContext.clearRect(0, 0, World.WIDTH, World.HEIGHT);
+
+				List<GameObject> objectsCopy = new ArrayList<GameObject>();
+				objectsCopy.addAll(World.OBJECTS);
+				for (GameObject object : objectsCopy) {
 					if (object instanceof Tickable) {
 						((Tickable) object).tick();
 					}
 					if (object instanceof Drawable) {
-						graphicalContext.clearRect(0, 0, World.WIDTH, World.HEIGHT);
 						((Drawable) object).draw(graphicalContext);
 					}
 				}
