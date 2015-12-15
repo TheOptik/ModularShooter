@@ -64,6 +64,7 @@ public class Engine extends Application {
 	}
 
 	private void setupAnimationTimer() {
+		
 		AnimationTimer timer = new AnimationTimer() {
 
 			@Override
@@ -72,7 +73,7 @@ public class Engine extends Application {
 				World.trySpawning();
 				graphicalContext.clearRect(0, 0, World.WIDTH, World.HEIGHT);
 
-				List<GameObject> objectsCopy = new ArrayList<GameObject>();
+				List<GameObject> objectsCopy = new ArrayList<>();
 				objectsCopy.addAll(World.OBJECTS);
 				for (GameObject object : objectsCopy) {
 					if (object instanceof Tickable) {
@@ -85,6 +86,7 @@ public class Engine extends Application {
 			}
 		};
 		timer.start();
+		
 	}
 
 }
