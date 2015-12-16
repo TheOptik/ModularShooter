@@ -38,9 +38,9 @@ public class BasicEnemy extends Enemy {
 		graphicsContext.fillRect(this.coordinates.xCoordinate, this.coordinates.yCoordinate, 5, 5);
 		if (boostParticles) {
 
-			for (int i = 0; i < (int) (Math.random() * 10 + 1); i++) {
+			//for (int i = 0; i < (int) (Math.random() * 10 + 1); i++) {
 				generateRandomBoostParticle();
-			}
+			//}
 
 			boostParticles = false;
 		}

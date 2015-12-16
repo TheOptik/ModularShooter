@@ -54,4 +54,8 @@ public class World {
 		return OBJECTS.remove(object);
 	}
 
+	public static int getObjectCount() {
+		return OBJECTS.size();
+	}
+
 }

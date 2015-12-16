@@ -1,10 +1,19 @@
 package engine;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import objects.GameObject;
@@ -65,7 +74,7 @@ public class Engine extends Application {
 
 			@Override
 			public void handle(long now) {
-
+				
 				World.trySpawning();
 				graphicalContext.clearRect(0, 0, World.WIDTH, World.HEIGHT);
 
@@ -81,6 +90,21 @@ public class Engine extends Application {
 		};
 		timer.start();
 
+	}
+	
+	private static void printCanvas(Canvas canvas) {
+		try{
+		String path = "C:/Users/shu/Desktop/";
+		System.out.println("Exporting Image");
+		SnapshotParameters sp = new SnapshotParameters();
+		WritableImage image = canvas.snapshot(sp, null);
+		BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
+		File file = new File(path + World.WIDTH + "x" + World.HEIGHT + ".png");
+		ImageIO.write(bImage, "png", file);
+		System.out.println("DONE!");
+		}catch(Exception e){
+			
+		}
 	}
 
 }
