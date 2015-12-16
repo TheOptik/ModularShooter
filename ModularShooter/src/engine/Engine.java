@@ -75,7 +75,8 @@ public class Engine extends Application {
 
 				World.trySpawning();
 				graphicalContext.clearRect(0, 0, World.WIDTH, World.HEIGHT);
-
+				World.PROTAGONIST.draw(graphicalContext);
+				World.PROTAGONIST.tick();
 				for (GameObject object : World.getAllObjects()) {
 					if (object instanceof Tickable) {
 						((Tickable) object).tick();
@@ -90,17 +91,18 @@ public class Engine extends Application {
 
 	}
 
-	private static void printCanvas(Canvas canvas) {
+	@SuppressWarnings("unused")
+	private static void printCanvas(Canvas canvas) { // NOSONAR
 		try {
 			String path = "C:/Users/shu/Desktop/";
-			System.out.println("Exporting Image");
+			System.out.println("Exporting Image"); // NOSONAR
 			SnapshotParameters sp = new SnapshotParameters();
 			WritableImage image = canvas.snapshot(sp, null);
 			BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
 			File file = new File(path + World.WIDTH + "x" + World.HEIGHT + ".png");
 			ImageIO.write(bImage, "png", file);
-			System.out.println("DONE!");
-		} catch (Exception e) {
+			System.out.println("DONE!"); // NOSONAR
+		} catch (Exception e) { // NOSONAR
 
 		}
 	}

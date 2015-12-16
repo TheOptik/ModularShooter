@@ -111,7 +111,7 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 					right = true;
 				}
 				if (event.getCode() == KeyCode.SPACE) {
-					System.out.println("PEW!!");
+					System.out.println("PEW!!"); // NOSONAR
 				}
 			}
 

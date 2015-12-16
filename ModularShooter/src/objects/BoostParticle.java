@@ -18,7 +18,6 @@ public class BoostParticle extends ParticleEffect {
 	public void draw(GraphicsContext graphicsContext) {
 		graphicsContext.setFill(new Color(1, 0, 1, Math.abs(lifeSpan / (double) maxLifeSpan)));
 		graphicsContext.fillRect(this.coordinates.xCoordinate, this.coordinates.yCoordinate, size, size);
-		System.out.println(this.coordinates.xCoordinate + " : " + this.coordinates.yCoordinate);
 	}
 
 	@Override

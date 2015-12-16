@@ -22,13 +22,14 @@ public abstract class GameObject {
 
 	public boolean hitTest(GameObject other) {
 
-		if (other != this) {
-			if (other.coordinates.xCoordinate >= this.coordinates.xCoordinate
-					&& other.coordinates.xCoordinate <= this.coordinates.xCoordinate + size
-					&& other.coordinates.yCoordinate >= this.coordinates.yCoordinate
-					&& other.coordinates.yCoordinate <= this.coordinates.yCoordinate + size) {
-				return true;
-			}
+		if (other == this) {
+			return false;
+		}
+		if (other.coordinates.xCoordinate >= this.coordinates.xCoordinate
+				&& other.coordinates.xCoordinate <= this.coordinates.xCoordinate + size
+				&& other.coordinates.yCoordinate >= this.coordinates.yCoordinate
+				&& other.coordinates.yCoordinate <= this.coordinates.yCoordinate + size) {
+			return true;
 		}
 		return false;
 	}

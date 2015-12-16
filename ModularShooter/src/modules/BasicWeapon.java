@@ -42,19 +42,19 @@ public class BasicWeapon extends Module {
 
 	private void shoot() {
 
-		if (relativePosition.yCoordinate != 0) {
-			if (relativePosition.xCoordinate != 0) {
+		if ((int) relativePosition.yCoordinate != 0) {
+			if ((int) relativePosition.xCoordinate != 0) {
 				double absoluteVectorLength = Math
 						.sqrt(Math.pow(relativePosition.xCoordinate, 2) + Math.pow(relativePosition.yCoordinate, 2));
-				double xVel = (relativePosition.xCoordinate / absoluteVectorLength);
-				double yVel = (relativePosition.yCoordinate / absoluteVectorLength);
+				double xVel = relativePosition.xCoordinate / absoluteVectorLength;
+				double yVel = relativePosition.yCoordinate / absoluteVectorLength;
 				World.addObject(new BasicProjectile(calculateAbsoluteCoordinates(), new Velocity(xVel, yVel), true));
 			} else {
 				World.addObject(new BasicProjectile(calculateAbsoluteCoordinates(),
 						new Velocity(0, Math.signum(relativePosition.yCoordinate)), true));
 			}
 		} else {
-			if (relativePosition.xCoordinate != 0) {
+			if ((int) relativePosition.xCoordinate != 0) {
 				World.addObject(new BasicProjectile(calculateAbsoluteCoordinates(),
 						new Velocity(Math.signum(relativePosition.xCoordinate), 0), true));
 			}
