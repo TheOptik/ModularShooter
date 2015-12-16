@@ -11,7 +11,13 @@ public abstract class GameObject {
 	protected int size;
 
 	protected Velocity randomVelocity() {
-		return new Velocity((Math.random() - 0.5) * 2, (Math.random() - 0.5) * 2);
+
+		double xVelocity = Math.random();
+		double yVelocity = Math.random();
+		if (xVelocity < 0.1 && yVelocity < 0.1) {
+			xVelocity += 0.5;
+		}
+		return new Velocity(xVelocity * Math.signum(Math.random() - 0.5), yVelocity * Math.signum(Math.random() - 0.5));
 	}
 
 	public boolean hitTest(GameObject other) {

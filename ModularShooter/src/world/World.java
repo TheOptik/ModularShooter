@@ -34,7 +34,7 @@ public class World {
 
 	public static void trySpawning() {
 
-		if (Math.random() <= SPAWN_PERCENTAGE / 100) {
+		if (/* Math.random() <= SPAWN_PERCENTAGE / 100 */ OBJECTS.size() <= 1) {
 			OBJECTS.add(Enemy.createRandomEnemy());
 		}
 

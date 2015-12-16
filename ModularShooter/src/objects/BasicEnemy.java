@@ -25,7 +25,7 @@ public class BasicEnemy extends Enemy {
 		this.velocity.xVelocity *= 0.99;
 		this.velocity.yVelocity *= 0.99;
 
-		if (this.velocity.xVelocity < 0.1 && this.velocity.yVelocity < 0.1) {
+		if (Math.abs(this.velocity.xVelocity) < 0.1 && Math.abs(this.velocity.yVelocity) < 0.1) {
 			this.velocity = randomVelocity();
 			boostParticles = true;
 		}
@@ -37,19 +37,17 @@ public class BasicEnemy extends Enemy {
 		graphicsContext.setFill(Color.RED);
 		graphicsContext.fillRect(this.coordinates.xCoordinate, this.coordinates.yCoordinate, 5, 5);
 		if (boostParticles) {
-
-			//for (int i = 0; i < (int) (Math.random() * 10 + 1); i++) {
+			for (int i = 0; i < (int) (Math.random() * 6 + 3); i++) {
 				generateRandomBoostParticle();
-			//}
-
+			}
 			boostParticles = false;
 		}
 
 	}
 
 	public void generateRandomBoostParticle() {
-		World.addObject(new BoostParticle(this.coordinates.xCoordinate,
-				this.coordinates.yCoordinate, this.velocity));
+		World.addObject(new BoostParticle(this.coordinates.xCoordinate + (Math.random() - 0.5) * 15,
+				this.coordinates.yCoordinate + (Math.random() - 0.5) * 15, this.velocity));
 	}
 
 }
