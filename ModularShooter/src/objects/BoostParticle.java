@@ -11,10 +11,10 @@ public class BoostParticle extends ParticleEffect {
 
 	public BoostParticle(double xCoordinate, double yCoordinate, Velocity velocity) {
 		super(xCoordinate, yCoordinate);
+		this.size = 20;
 		double startAngleRads = Math.acos(
-				velocity.xVelocity / Math.sqrt(Math.pow(velocity.xVelocity, 2) + Math.pow(velocity.yVelocity, 2)));
+				velocity.yVelocity / Math.sqrt(Math.pow(velocity.xVelocity, 2) + Math.pow(velocity.yVelocity, 2)));
 		startAngle = Math.toDegrees(startAngleRads);
-		System.out.println(velocity.xVelocity + " (*) " + velocity.yVelocity + " = " + startAngle);
 		this.velocity = new Velocity(velocity.xVelocity * -0.2, velocity.yVelocity * -0.2);
 		this.maxLifeSpan = lifeSpan;
 	}
@@ -23,8 +23,8 @@ public class BoostParticle extends ParticleEffect {
 	public void draw(GraphicsContext graphicsContext) {
 
 		graphicsContext.setStroke(new Color(1, 0, 1, Math.abs(lifeSpan / (double) maxLifeSpan)));
-		graphicsContext.strokeArc(this.coordinates.xCoordinate, this.coordinates.yCoordinate, 20, 20, startAngle, 180,
-				ArcType.OPEN);
+		graphicsContext.strokeArc(this.coordinates.xCoordinate - size / 2, this.coordinates.yCoordinate - size / 2,
+				size, size, startAngle, 180, ArcType.OPEN);
 	}
 
 	@Override

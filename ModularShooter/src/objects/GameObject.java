@@ -26,8 +26,8 @@ public abstract class GameObject {
 		}
 		return false;
 	}
-	
-	public void hit(){
+
+	public void hit() {
 		World.removeObject(this);
 	}
 
