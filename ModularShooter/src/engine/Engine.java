@@ -43,7 +43,6 @@ public class Engine extends Application {
 	}
 
 	private static void setupProtagonist() {
-		World.addObject(World.PROTAGONIST);
 		canvas.setOnKeyPressed(World.PROTAGONIST.getKeyPressed());
 		canvas.setOnKeyReleased(World.PROTAGONIST.getKeyReleased());
 	}
