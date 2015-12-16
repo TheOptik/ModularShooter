@@ -27,6 +27,7 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 	private boolean down;
 
 	public Protagonist() {
+		this.size = 5;
 		this.coordinates = new Coordinates(World.WIDTH / 2, World.HEIGHT / 2);
 		this.velocity = new Velocity(0, 0);
 
@@ -38,7 +39,7 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 	@Override
 	public void draw(GraphicsContext graphicsContext) {
 		graphicsContext.setFill(new Color(0, 1, 0, 1));
-		graphicsContext.fillRect(this.coordinates.xCoordinate, this.coordinates.yCoordinate, 5, 5);
+		graphicsContext.fillRect(this.coordinates.xCoordinate, this.coordinates.yCoordinate, size, size);
 
 		for (Module mod : Protagonist.MODULES) {
 			mod.draw(graphicsContext);

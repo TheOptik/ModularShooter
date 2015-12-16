@@ -9,8 +9,9 @@ public abstract class Enemy extends GameObject implements Tickable, Drawable {
 
 	double health;
 
-	public Enemy(double xCoordinate, double yCoordinate) {
-		this.coordinates = new Coordinates(xCoordinate, yCoordinate);
+	public Enemy(Coordinates coordinates) {
+		this.size = 5;
+		this.coordinates = coordinates;
 		this.velocity = randomVelocity();
 	}
 

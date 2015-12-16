@@ -2,18 +2,19 @@ package objects;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import util.Coordinates;
 import world.World;
 
 public class BasicEnemy extends Enemy {
 
 	private boolean boostParticles = false;
 
-	public BasicEnemy(double xCoordinate, double yCoordinate) {
-		super(xCoordinate, yCoordinate);
+	public BasicEnemy(Coordinates coordinates) {
+		super(coordinates);
 	}
 
 	public BasicEnemy() {
-		super(Math.random() * World.WIDTH, Math.random() * World.HEIGHT);
+		super(new Coordinates(Math.random() * World.WIDTH, Math.random() * World.HEIGHT));
 	}
 
 	@Override
