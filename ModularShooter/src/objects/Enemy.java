@@ -3,7 +3,6 @@ package objects;
 import util.Coordinates;
 import util.Drawable;
 import util.Tickable;
-import util.Velocity;
 import world.World;
 
 public abstract class Enemy extends GameObject implements Tickable, Drawable {
@@ -12,7 +11,7 @@ public abstract class Enemy extends GameObject implements Tickable, Drawable {
 
 	public Enemy(double xCoordinate, double yCoordinate) {
 		this.coordinates = new Coordinates(xCoordinate, yCoordinate);
-		this.velocity = new Velocity(randomVelocity(), randomVelocity());
+		this.velocity = randomVelocity();
 	}
 
 	public static Enemy createRandomEnemy() {

@@ -25,8 +25,7 @@ public class BasicEnemy extends Enemy {
 		this.velocity.yVelocity *= 0.99;
 
 		if (this.velocity.xVelocity < 0.1 && this.velocity.yVelocity < 0.1) {
-			this.velocity.xVelocity = randomVelocity();
-			this.velocity.yVelocity = randomVelocity();
+			this.velocity = randomVelocity();
 			boostParticles = true;
 		}
 	}

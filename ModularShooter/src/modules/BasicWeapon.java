@@ -2,7 +2,9 @@ package modules;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import projectiles.BasicProjectile;
 import util.Coordinates;
+import util.Velocity;
 import world.World;
 
 public class BasicWeapon extends Module {
@@ -17,19 +19,27 @@ public class BasicWeapon extends Module {
 	@Override
 	public void draw(GraphicsContext graphicsContext) {
 		graphicsContext.setFill(Color.YELLOW);
-		double xPos = World.PROTAGONIST.coordinates.xCoordinate + relativePosition.xCoordinate * 5;
-		double yPos = World.PROTAGONIST.coordinates.yCoordinate + relativePosition.yCoordinate * 5;
-		graphicsContext.fillRect(xPos, yPos, 5, 5);
+		graphicsContext.fillRect(calculateXCoordinate(), calculateYCoordinate(), 5, 5);
 
 	}
 
 	@Override
 	public void tick() {
 		if (cooldown <= 0) {
-			// SHOOT!
+			World.addObject(new BasicProjectile(new Coordinates(calculateXCoordinate(), calculateYCoordinate()),
+					new Velocity(Math.signum(relativePosition.xCoordinate), Math.signum(relativePosition.yCoordinate)),
+					true));
 			cooldown = defaultCooldown;
 		}
 		cooldown--;
+	}
+
+	private double calculateXCoordinate() {
+		return World.PROTAGONIST.coordinates.xCoordinate + relativePosition.xCoordinate * 5;
+	}
+
+	private double calculateYCoordinate() {
+		return World.PROTAGONIST.coordinates.yCoordinate + relativePosition.yCoordinate * 5;
 	}
 
 }
