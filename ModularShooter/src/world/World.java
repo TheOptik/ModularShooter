@@ -25,6 +25,11 @@ public class World {
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, 1)));
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(-1, 0)));
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -1)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(2, 0)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(3, 0)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(3, 1)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(3, 2)));
+
 	}
 
 	public static void trySpawning() {
@@ -40,10 +45,12 @@ public class World {
 		copy.addAll(OBJECTS);
 		return copy;
 	}
-	public static boolean addObject(GameObject object){
+
+	public static boolean addObject(GameObject object) {
 		return OBJECTS.add(object);
 	}
-	public static boolean removeObject(GameObject object){
+
+	public static boolean removeObject(GameObject object) {
 		return OBJECTS.remove(object);
 	}
 
