@@ -22,10 +22,10 @@ public abstract class Enemy extends GameObject implements Tickable, Drawable {
 	@Override
 	public void tick() {
 		if (this.coordinates.xCoordinate > World.WIDTH || this.coordinates.xCoordinate < 0) {
-			World.OBJECTS.remove(this);
+			World.removeObject(this);
 		}
 		if (this.coordinates.yCoordinate > World.HEIGHT || this.coordinates.yCoordinate < 0) {
-			World.OBJECTS.remove(this);
+			World.removeObject(this);
 		}
 	}
 

@@ -14,7 +14,7 @@ public class World {
 	public static final int HEIGHT = 800;
 	public static final Protagonist PROTAGONIST = new Protagonist();
 	public static final double SPAWN_PERCENTAGE = 5;
-	public static final List<GameObject> OBJECTS = new ArrayList<>();
+	private static final List<GameObject> OBJECTS = new ArrayList<>();
 
 	private World() {
 		// You shall not instantiate!
@@ -30,6 +30,18 @@ public class World {
 			OBJECTS.add(Enemy.createRandomEnemy());
 		}
 
+	}
+
+	public static List<GameObject> getAllObjects() {
+		List<GameObject> copy = new ArrayList<>();
+		copy.addAll(OBJECTS);
+		return copy;
+	}
+	public static boolean addObject(GameObject object){
+		return OBJECTS.add(object);
+	}
+	public static boolean removeObject(GameObject object){
+		return OBJECTS.remove(object);
 	}
 
 }

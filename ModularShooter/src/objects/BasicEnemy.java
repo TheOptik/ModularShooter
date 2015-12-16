@@ -48,7 +48,7 @@ public class BasicEnemy extends Enemy {
 	}
 
 	public void generateRandomBoostParticle() {
-		World.OBJECTS.add(new BoostParticle(this.coordinates.xCoordinate + (Math.random() - 0.5) * 15,
+		World.addObject(new BoostParticle(this.coordinates.xCoordinate + (Math.random() - 0.5) * 15,
 				this.coordinates.yCoordinate + (Math.random() - 0.5) * 15, this.velocity));
 	}
 

@@ -1,8 +1,5 @@
 package engine;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -17,8 +14,13 @@ import world.World;
 
 public class Engine extends Application {
 
-	private Canvas canvas;
-	private GraphicsContext graphicalContext;
+	private static Canvas canvas;
+	private static GraphicsContext graphicalContext;
+
+	static {
+		setupCanvas();
+		setupProtagonist();
+	}
 
 	public static void main(String[] args) {
 		launch();
@@ -30,41 +32,35 @@ public class Engine extends Application {
 		canvas.requestFocus();
 		setupAnimationTimer();
 
-		// TODO: auslagern!
-		World.OBJECTS.add(World.PROTAGONIST);
+	}
+
+	private static void setupProtagonist() {
+		World.addObject(World.PROTAGONIST);
 		canvas.setOnKeyPressed(World.PROTAGONIST.getKeyPressed());
 		canvas.setOnKeyReleased(World.PROTAGONIST.getKeyReleased());
 	}
 
-	private void setupStage(final Stage stage) {
+	private static void setupStage(final Stage stage) {
 		stage.setTitle("Modular Shooter");
-		/*
-		 * TODO: Just in Case stage.setOnCloseRequest(new
-		 * EventHandler<WindowEvent>() { public void handle(final WindowEvent
-		 * event) {
-		 * 
-		 * event.consume(); } });
-		 */
 		stage.setScene(setupScene());
 		stage.show();
 	}
 
-	private Scene setupScene() {
-		setupCanvas();
+	private static Scene setupScene() {
 		Pane pane = new Pane();
 		pane.setStyle(" -fx-background-color: black");
 		pane.getChildren().add(canvas);
 		return new Scene(pane, World.WIDTH, World.HEIGHT);
 	}
 
-	private void setupCanvas() {
+	private static void setupCanvas() {
 		canvas = new Canvas(World.WIDTH, World.HEIGHT);
 		canvas.setFocusTraversable(true);
 		graphicalContext = canvas.getGraphicsContext2D();
 	}
 
-	private void setupAnimationTimer() {
-		
+	private static void setupAnimationTimer() {
+
 		AnimationTimer timer = new AnimationTimer() {
 
 			@Override
@@ -73,9 +69,7 @@ public class Engine extends Application {
 				World.trySpawning();
 				graphicalContext.clearRect(0, 0, World.WIDTH, World.HEIGHT);
 
-				List<GameObject> objectsCopy = new ArrayList<>();
-				objectsCopy.addAll(World.OBJECTS);
-				for (GameObject object : objectsCopy) {
+				for (GameObject object : World.getAllObjects()) {
 					if (object instanceof Tickable) {
 						((Tickable) object).tick();
 					}
@@ -86,7 +80,7 @@ public class Engine extends Application {
 			}
 		};
 		timer.start();
-		
+
 	}
 
 }

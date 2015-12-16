@@ -17,7 +17,7 @@ public abstract class ParticleEffect extends GameObject implements Drawable, Tic
 	@Override
 	public void tick() {
 		if (this.lifeSpan <= 0) {
-			World.OBJECTS.remove(this);
+			World.removeObject(this);
 		}
 		this.lifeSpan -= 1;
 	}
