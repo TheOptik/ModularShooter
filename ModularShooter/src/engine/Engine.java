@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
@@ -16,6 +17,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import util.Drawable;
 import util.Tickable;
 import world.World;
@@ -24,6 +26,7 @@ public class Engine extends Application {
 
 	private static Canvas canvas;
 	private static GraphicsContext graphicalContext;
+	private static AnimationTimer timer;
 
 	static {
 		setupCanvas();
@@ -68,24 +71,7 @@ public class Engine extends Application {
 
 	private static void setupAnimationTimer() {
 
-		AnimationTimer timer = new AnimationTimer() {
-
-			@Override
-			public void handle(long now) {
-
-				World.trySpawning();
-				graphicalContext.clearRect(0, 0, World.WIDTH, World.HEIGHT);
-				World.PROTAGONIST.draw(graphicalContext);
-				World.PROTAGONIST.tick();
-				showScore(graphicalContext);
-				for (Tickable object : World.getAllTickableObjects()) {
-					object.tick();
-				}
-				for (Drawable object : World.getAllDrawableObjects()) {
-					object.draw(graphicalContext);
-				}
-			}
-		};
+		timer = new HeartBeat(graphicalContext);
 		timer.start();
 
 	}
@@ -104,13 +90,6 @@ public class Engine extends Application {
 		} catch (Exception e) { // NOSONAR
 
 		}
-	}
-
-	protected static void showScore(GraphicsContext graphicalContext) {
-
-		graphicalContext.setFill(Color.GREEN);
-		graphicalContext.fillText(Long.toString(World.getScore()), 10, 15);
-
 	}
 
 }
