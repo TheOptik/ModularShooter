@@ -16,7 +16,7 @@ public class World {
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 800;
 	public static final Protagonist PROTAGONIST = new Protagonist();
-	public static final double SPAWN_PERCENTAGE = 5;
+	public static final double SPAWN_PERCENTAGE = 100;
 	private static final List<Tickable> TICKABLES = new ArrayList<>();
 	private static final List<Drawable> DRAWABLES = new ArrayList<>();
 	private static final List<Hitable> HITABLES = new ArrayList<>();
@@ -28,13 +28,13 @@ public class World {
 
 	static {
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, 0)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, 1)));
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(-1, 0)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, 1)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(-1, 1)));
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -1)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(2, 0)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(3, 0)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(3, 1)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(3, 2)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(-1, -1)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, 0)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, 0)));
 
 	}
 

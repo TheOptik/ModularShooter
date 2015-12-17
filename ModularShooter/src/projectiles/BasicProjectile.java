@@ -11,12 +11,13 @@ public class BasicProjectile extends Projectile {
 
 	public BasicProjectile(Coordinates coordinates, Velocity velocity, boolean friendly) {
 		super(coordinates, velocity, friendly);
+		this.size = 2;
 	}
 
 	@Override
 	public void draw(GraphicsContext graphicsContext) {
 		graphicsContext.setFill(Color.WHITE);
-		graphicsContext.fillRect(this.coordinates.xCoordinate, this.coordinates.yCoordinate, 2, 2);
+		graphicsContext.fillRect(this.coordinates.xCoordinate, this.coordinates.yCoordinate, size, size);
 	}
 
 	@Override
