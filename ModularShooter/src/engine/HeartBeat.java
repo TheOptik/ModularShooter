@@ -26,7 +26,7 @@ public class HeartBeat extends AnimationTimer {
 		graphicalContext.clearRect(0, 0, World.WIDTH, World.HEIGHT);
 		World.PROTAGONIST.draw(graphicalContext);
 		World.PROTAGONIST.tick();
-		showScoreAndFPS(graphicalContext);
+		showData(graphicalContext);
 		for (Tickable object : World.getAllTickableObjects()) {
 			object.tick();
 		}
@@ -35,11 +35,12 @@ public class HeartBeat extends AnimationTimer {
 		}
 	}
 
-	protected static void showScoreAndFPS(GraphicsContext graphicalContext) {
+	protected static void showData(GraphicsContext graphicalContext) {
 
 		graphicalContext.setFill(Color.GREEN);
 		graphicalContext.fillText("Score:  ".concat(Long.toString(World.getScore())), 10, 15);
 		graphicalContext.fillText("FPS:     ".concat(Integer.toString(fps / 1000000)), 10, 30);
+		graphicalContext.fillText("#Objc:  ".concat(Integer.toString(World.getObjectCount())), 10, 45);
 
 	}
 

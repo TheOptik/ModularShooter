@@ -22,14 +22,12 @@ public abstract class Enemy extends GameObject implements Tickable, Drawable, Hi
 
 	@Override
 	public void tick() {
-		if (this.coordinates.xCoordinate > World.WIDTH || this.coordinates.xCoordinate < 0) {
-			World.removeObject(this);
-		}
-		if (this.coordinates.yCoordinate > World.HEIGHT || this.coordinates.yCoordinate < 0) {
+		if (isOutOfBounds()) {
 			World.removeObject(this);
 		}
 	}
 
+	@Override
 	public boolean hitTest(GameObject other) {
 		return coordinates.xCoordinate < other.coordinates.xCoordinate + other.size
 				&& coordinates.xCoordinate + size > other.coordinates.xCoordinate
@@ -37,6 +35,7 @@ public abstract class Enemy extends GameObject implements Tickable, Drawable, Hi
 				&& coordinates.yCoordinate + size > other.coordinates.yCoordinate;
 	}
 
+	@Override
 	public void hit() {
 		World.addScore(10);
 		World.removeObject(this);

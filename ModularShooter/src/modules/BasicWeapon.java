@@ -9,8 +9,8 @@ import world.World;
 
 public class BasicWeapon extends Module {
 
-	private int cooldown = 80;
-	int defaultCooldown = 80;
+	private int cooldown = 8;
+	private int defaultCooldown = cooldown;
 
 	public BasicWeapon(Coordinates relativePosition) {
 		super(relativePosition);

@@ -2,6 +2,7 @@ package objects;
 
 import util.Coordinates;
 import util.Velocity;
+import world.World;
 
 public abstract class GameObject {
 
@@ -19,4 +20,9 @@ public abstract class GameObject {
 		return new Velocity(xVelocity * Math.signum(Math.random() - 0.5), yVelocity * Math.signum(Math.random() - 0.5));
 	}
 
+	protected boolean isOutOfBounds() {
+		return this.coordinates.xCoordinate > World.WIDTH || this.coordinates.xCoordinate < 0
+				|| this.coordinates.yCoordinate > World.HEIGHT || this.coordinates.yCoordinate < 0;
+
+	}
 }

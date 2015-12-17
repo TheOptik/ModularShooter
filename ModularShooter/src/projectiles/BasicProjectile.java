@@ -11,7 +11,7 @@ public class BasicProjectile extends Projectile {
 
 	public BasicProjectile(Coordinates coordinates, Velocity velocity, boolean friendly) {
 		super(coordinates, velocity, friendly);
-		this.size = 2;
+		this.size = 30;
 	}
 
 	@Override
@@ -22,10 +22,14 @@ public class BasicProjectile extends Projectile {
 
 	@Override
 	public void tick() {
-		this.coordinates.calculateMovement(this.velocity);
-		for (Hitable object : World.getAllHitableObjects()) {
-			if (object.hitTest(this)) {
-				object.hit();
+		if (isOutOfBounds()) {
+			World.removeObject(this);
+		} else {
+			this.coordinates.calculateMovement(this.velocity);
+			for (Hitable object : World.getAllHitableObjects()) {
+				if (object.hitTest(this)) {
+					object.hit();
+				}
 			}
 		}
 	}
