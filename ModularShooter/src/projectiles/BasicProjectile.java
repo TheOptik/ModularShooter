@@ -2,12 +2,12 @@ package projectiles;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import objects.GameObject;
 import util.Coordinates;
+import util.Hitable;
 import util.Velocity;
 import world.World;
 
-public class BasicProjectile extends Projectile{
+public class BasicProjectile extends Projectile {
 
 	public BasicProjectile(Coordinates coordinates, Velocity velocity, boolean friendly) {
 		super(coordinates, velocity, friendly);
@@ -22,8 +22,8 @@ public class BasicProjectile extends Projectile{
 	@Override
 	public void tick() {
 		this.coordinates.calculateMovement(this.velocity);
-		for(GameObject object : World.getAllObjects()){
-			if(object.hitTest(this)){
+		for (Hitable object : World.getAllHitableObjects()) {
+			if (object.hitTest(this)) {
 				object.hit();
 			}
 		}

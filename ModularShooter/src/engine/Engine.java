@@ -15,7 +15,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import objects.GameObject;
 import util.Drawable;
 import util.Tickable;
 import world.World;
@@ -77,13 +76,11 @@ public class Engine extends Application {
 				graphicalContext.clearRect(0, 0, World.WIDTH, World.HEIGHT);
 				World.PROTAGONIST.draw(graphicalContext);
 				World.PROTAGONIST.tick();
-				for (GameObject object : World.getAllObjects()) {
-					if (object instanceof Tickable) {
-						((Tickable) object).tick();
-					}
-					if (object instanceof Drawable) {
-						((Drawable) object).draw(graphicalContext);
-					}
+				for (Tickable object : World.getAllTickableObjects()) {
+					object.tick();
+				}
+				for (Drawable object : World.getAllDrawableObjects()) {
+					object.draw(graphicalContext);
 				}
 			}
 		};

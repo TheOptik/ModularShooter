@@ -8,13 +8,18 @@ import objects.Enemy;
 import objects.GameObject;
 import objects.Protagonist;
 import util.Coordinates;
+import util.Drawable;
+import util.Hitable;
+import util.Tickable;
 
 public class World {
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 800;
 	public static final Protagonist PROTAGONIST = new Protagonist();
 	public static final double SPAWN_PERCENTAGE = 5;
-	private static final List<GameObject> OBJECTS = new ArrayList<>();
+	private static final List<Tickable> TICKABLES = new ArrayList<>();
+	private static final List<Drawable> DRAWABLES = new ArrayList<>();
+	private static final List<Hitable> HITABLES = new ArrayList<>();
 
 	private World() {
 		// You shall not instantiate!
@@ -35,30 +40,55 @@ public class World {
 	public static void trySpawning() {
 
 		if (Math.random() <= SPAWN_PERCENTAGE / 100) {
-			OBJECTS.add(Enemy.createRandomEnemy());
+			addObject(Enemy.createRandomEnemy());
 		}
 
 	}
 
-	public static List<GameObject> getAllObjects() {
-		List<GameObject> copy = new ArrayList<>();
-		copy.addAll(OBJECTS);
+	public static List<Tickable> getAllTickableObjects() {
+		List<Tickable> copy = new ArrayList<>();
+		copy.addAll(TICKABLES);
 		return copy;
 	}
 
-	public static boolean addObject(GameObject object) {
-		return OBJECTS.add(object); // TODO sort using interfaces, make lists
-									// with all drawable, all tickables etc. and
-									// then join them when someone requests them
-									// all.
+	public static List<Drawable> getAllDrawableObjects() {
+		List<Drawable> copy = new ArrayList<>();
+		copy.addAll(DRAWABLES);
+		return copy;
 	}
 
-	public static boolean removeObject(GameObject object) {
-		return OBJECTS.remove(object);
+	public static List<Hitable> getAllHitableObjects() {
+		List<Hitable> copy = new ArrayList<>();
+		copy.addAll(HITABLES);
+		return copy;
+	}
+
+	public static void addObject(GameObject object) {
+		if (object instanceof Drawable) {
+			DRAWABLES.add((Drawable) object);
+		}
+		if (object instanceof Tickable) {
+			TICKABLES.add((Tickable) object);
+		}
+		if (object instanceof Hitable) {
+			HITABLES.add((Hitable) object);
+		}
+	}
+
+	public static void removeObject(GameObject object) {
+		if (object instanceof Drawable) {
+			DRAWABLES.remove((Drawable) object);
+		}
+		if (object instanceof Tickable) {
+			TICKABLES.remove((Tickable) object);
+		}
+		if (object instanceof Hitable) {
+			HITABLES.remove((Hitable) object);
+		}
 	}
 
 	public static int getObjectCount() {
-		return OBJECTS.size();
+		return HITABLES.size() + DRAWABLES.size() + TICKABLES.size();
 	}
 
 }

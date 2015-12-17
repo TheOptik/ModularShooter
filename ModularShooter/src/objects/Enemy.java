@@ -2,10 +2,11 @@ package objects;
 
 import util.Coordinates;
 import util.Drawable;
+import util.Hitable;
 import util.Tickable;
 import world.World;
 
-public abstract class Enemy extends GameObject implements Tickable, Drawable {
+public abstract class Enemy extends GameObject implements Tickable, Drawable, Hitable {
 
 	double health;
 
@@ -27,6 +28,24 @@ public abstract class Enemy extends GameObject implements Tickable, Drawable {
 		if (this.coordinates.yCoordinate > World.HEIGHT || this.coordinates.yCoordinate < 0) {
 			World.removeObject(this);
 		}
+	}
+
+	public boolean hitTest(GameObject other) {
+
+		if (other == this) {
+			return false;
+		}
+		if (other.coordinates.xCoordinate >= this.coordinates.xCoordinate
+				&& other.coordinates.xCoordinate <= this.coordinates.xCoordinate + size
+				&& other.coordinates.yCoordinate >= this.coordinates.yCoordinate
+				&& other.coordinates.yCoordinate <= this.coordinates.yCoordinate + size) {
+			return true;
+		}
+		return false;
+	}
+
+	public void hit() {
+		World.removeObject(this);
 	}
 
 }
