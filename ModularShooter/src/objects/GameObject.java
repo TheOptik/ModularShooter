@@ -20,7 +20,9 @@ public abstract class GameObject {
 		return new Velocity(xVelocity * Math.signum(Math.random() - 0.5), yVelocity * Math.signum(Math.random() - 0.5));
 	}
 
-	public boolean hitTest(GameObject other) {
+	public boolean hitTest(GameObject other) { // FIXME make hittable interface
+												// so we dont have to hit test
+												// Particle effects for example.
 
 		if (other == this) {
 			return false;

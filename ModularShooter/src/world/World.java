@@ -47,7 +47,10 @@ public class World {
 	}
 
 	public static boolean addObject(GameObject object) {
-		return OBJECTS.add(object);
+		return OBJECTS.add(object); // TODO sort using interfaces, make lists
+									// with all drawable, all tickables etc. and
+									// then join them when someone requests them
+									// all.
 	}
 
 	public static boolean removeObject(GameObject object) {
