@@ -20,6 +20,7 @@ public class World {
 	private static final List<Tickable> TICKABLES = new ArrayList<>();
 	private static final List<Drawable> DRAWABLES = new ArrayList<>();
 	private static final List<Hitable> HITABLES = new ArrayList<>();
+	private static long score = 0;
 
 	private World() {
 		// You shall not instantiate!
@@ -89,6 +90,14 @@ public class World {
 
 	public static int getObjectCount() {
 		return HITABLES.size() + DRAWABLES.size() + TICKABLES.size();
+	}
+
+	public static void addScore(int amount) {
+		score += amount;
+	}
+
+	public static long getScore() {
+		return score;
 	}
 
 }

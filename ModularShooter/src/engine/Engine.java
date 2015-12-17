@@ -14,6 +14,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import util.Drawable;
 import util.Tickable;
@@ -76,6 +77,7 @@ public class Engine extends Application {
 				graphicalContext.clearRect(0, 0, World.WIDTH, World.HEIGHT);
 				World.PROTAGONIST.draw(graphicalContext);
 				World.PROTAGONIST.tick();
+				showScore(graphicalContext);
 				for (Tickable object : World.getAllTickableObjects()) {
 					object.tick();
 				}
@@ -102,6 +104,13 @@ public class Engine extends Application {
 		} catch (Exception e) { // NOSONAR
 
 		}
+	}
+
+	protected static void showScore(GraphicsContext graphicalContext) {
+
+		graphicalContext.setFill(Color.GREEN);
+		graphicalContext.fillText(Long.toString(World.getScore()), 10, 15);
+
 	}
 
 }

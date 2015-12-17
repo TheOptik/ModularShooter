@@ -45,6 +45,7 @@ public abstract class Enemy extends GameObject implements Tickable, Drawable, Hi
 	}
 
 	public void hit() {
+		World.addScore(10);
 		World.removeObject(this);
 	}
 
