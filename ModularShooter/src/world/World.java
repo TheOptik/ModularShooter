@@ -27,14 +27,14 @@ public class World {
 	}
 
 	static {
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, 0)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(-1, 0)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, 1)));
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(-1, 1)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -1)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, 1)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, 1)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(-1, 0)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, 0)));
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(-1, -1)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, 0)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, 0)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, -1)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -1)));
 
 	}
 
