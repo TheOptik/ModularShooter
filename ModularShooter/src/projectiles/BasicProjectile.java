@@ -11,7 +11,7 @@ public class BasicProjectile extends Projectile {
 
 	public BasicProjectile(Coordinates coordinates, Velocity velocity, boolean friendly) {
 		super(coordinates, velocity, friendly);
-		this.size = 30;
+		this.size = 3;
 	}
 
 	@Override

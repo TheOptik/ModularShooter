@@ -13,14 +13,15 @@ import util.Hitable;
 import util.Tickable;
 
 public class World {
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 800;
+	public static int WIDTH = 800; // TODO private mit gettern und settern >_>
+	public static int HEIGHT = 800;
 	public static final Protagonist PROTAGONIST = new Protagonist();
 	public static final double SPAWN_PERCENTAGE = 100;
 	private static final List<Tickable> TICKABLES = new ArrayList<>();
 	private static final List<Drawable> DRAWABLES = new ArrayList<>();
 	private static final List<Hitable> HITABLES = new ArrayList<>();
 	private static long score = 0;
+	private static final boolean FULLSCREEN = true;
 
 	private World() {
 		// You shall not instantiate!
@@ -98,6 +99,10 @@ public class World {
 
 	public static long getScore() {
 		return score;
+	}
+
+	public static boolean isFullScreen() {
+		return FULLSCREEN;
 	}
 
 }

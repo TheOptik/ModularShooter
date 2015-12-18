@@ -1,5 +1,7 @@
 package engine;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -16,16 +18,21 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import world.World;
+import util.ResizableCanvas;
 
 public class Engine extends Application {
 
-	private static Canvas canvas;
+	private static ResizableCanvas canvas;
 	private static GraphicsContext graphicalContext;
 	private static AnimationTimer timer;
 
 	static {
 		setupCanvas();
 		setupProtagonist();
+	}
+
+	public Engine() {
+		// You shall not instantiate!
 	}
 
 	public static void main(String[] args) {
@@ -47,6 +54,16 @@ public class Engine extends Application {
 
 	private static void setupStage(final Stage stage) {
 		stage.setTitle("Modular Shooter");
+		if (World.isFullScreen()) {
+			Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+			World.HEIGHT = (int) dim.getHeight();
+			World.WIDTH = (int) dim.getWidth();
+			canvas.resize(World.WIDTH, World.HEIGHT);
+			stage.setFullScreenExitHint("");
+			stage.setFullScreen(true);
+			World.PROTAGONIST.coordinates.xCoordinate = World.WIDTH / 2;
+			World.PROTAGONIST.coordinates.yCoordinate = World.HEIGHT / 2;
+		}
 		stage.setScene(setupScene());
 		stage.show();
 	}
@@ -59,7 +76,8 @@ public class Engine extends Application {
 	}
 
 	private static void setupCanvas() {
-		canvas = new Canvas(World.WIDTH, World.HEIGHT);
+		canvas = new ResizableCanvas(World.WIDTH, World.HEIGHT);
+		System.out.println(canvas.isResizable());
 		canvas.setFocusTraversable(true);
 		graphicalContext = canvas.getGraphicsContext2D();
 	}
