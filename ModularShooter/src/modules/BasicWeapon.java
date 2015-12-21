@@ -9,7 +9,7 @@ import world.World;
 
 public class BasicWeapon extends Module {
 
-	private int cooldown = 8;
+	private int cooldown = 80;
 	private int defaultCooldown = cooldown;
 
 	public BasicWeapon(Coordinates relativePosition) {
@@ -40,7 +40,7 @@ public class BasicWeapon extends Module {
 		return World.PROTAGONIST.coordinates.yCoordinate + relativePosition.yCoordinate * 5;
 	}
 
-	private void shoot() {
+	private void shoot() { //TODO wow, das ist..... unleserlich wie sau.
 
 		if ((int) relativePosition.yCoordinate != 0) {
 			if ((int) relativePosition.xCoordinate != 0) {

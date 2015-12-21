@@ -26,6 +26,11 @@ public class BasicProjectile extends Projectile {
 			World.removeObject(this);
 		} else {
 			this.coordinates.calculateMovement(this.velocity);
+			if (Math.abs(this.velocity.xVelocity) > Math.abs(this.velocity.yVelocity)) {
+				this.velocity.yVelocity *= 0.99;
+			} else if (Math.abs(this.velocity.xVelocity) < Math.abs(this.velocity.yVelocity)) {
+				this.velocity.xVelocity *= 0.99;
+			}
 			for (Hitable object : World.getAllHitableObjects()) {
 				if (object.hitTest(this)) {
 					object.hit();

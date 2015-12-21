@@ -22,8 +22,8 @@ public class BasicEnemy extends Enemy {
 		this.coordinates.xCoordinate += this.velocity.xVelocity;
 		this.coordinates.yCoordinate += this.velocity.yVelocity;
 
-		this.velocity.xVelocity *= 0.99;
-		this.velocity.yVelocity *= 0.99;
+		this.velocity.xVelocity *= 0.995;
+		this.velocity.yVelocity *= 0.995;
 
 		if (Math.abs(this.velocity.xVelocity) < 0.1 && Math.abs(this.velocity.yVelocity) < 0.1) {
 			this.velocity = randomVelocity();
