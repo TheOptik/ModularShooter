@@ -3,6 +3,7 @@ package objects;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
@@ -94,6 +95,11 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 
 			@Override
 			public void handle(final KeyEvent event) {
+
+				if (event.isAltDown() && event.getCode() == KeyCode.F4) {
+					Platform.exit();
+				}
+
 				if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.W) {
 					Protagonist.this.velocity.yVelocity = -1;
 					up = true;
