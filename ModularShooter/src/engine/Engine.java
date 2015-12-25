@@ -17,12 +17,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import util.ResizableCanvas;
 import world.World;
+import util.ResizableCanvas;
 
 public class Engine extends Application {
 
-	private static boolean fullscreen;
 	private static ResizableCanvas canvas;
 	private static GraphicsContext graphicalContext;
 	private static AnimationTimer timer;
@@ -37,14 +36,6 @@ public class Engine extends Application {
 	}
 
 	public static void main(String[] args) {
-		if (args.length > 0) {
-			try {
-				fullscreen = Boolean.parseBoolean(args[0]);
-			} catch (Exception e) {
-				System.out.println("no boolean provided");
-				fullscreen = false;
-			}
-		}
 		launch();
 	}
 
@@ -69,9 +60,9 @@ public class Engine extends Application {
 			World.WIDTH = (int) dim.getWidth();
 			canvas.resize(World.WIDTH, World.HEIGHT);
 			stage.setFullScreenExitHint("");
-			stage.setFullScreen(fullscreen);
-			World.PROTAGONIST.coordinates.xCoordinate = World.WIDTH / 2.0;
-			World.PROTAGONIST.coordinates.yCoordinate = World.HEIGHT / 2.0;
+			stage.setFullScreen(true);
+			World.PROTAGONIST.coordinates.xCoordinate = World.WIDTH / 2;
+			World.PROTAGONIST.coordinates.yCoordinate = World.HEIGHT / 2;
 		}
 		stage.setScene(setupScene());
 		stage.show();
