@@ -85,7 +85,6 @@ public class Engine extends Application {
 
 	private static void setupCanvas() {
 		canvas = new ResizableCanvas(World.WIDTH, World.HEIGHT);
-		System.out.println(canvas.isResizable());
 		canvas.setFocusTraversable(true);
 		graphicalContext = canvas.getGraphicsContext2D();
 	}

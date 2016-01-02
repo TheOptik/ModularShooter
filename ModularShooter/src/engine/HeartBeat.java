@@ -48,7 +48,7 @@ public class HeartBeat extends AnimationTimer {
 
 		fps = 0;
 		for (int i = 0; i < times.length; i++) {
-			fps += now - times[i];
+			fps += times[i];
 		}
 		for (int i = 0; i < times.length - 1; i++) {
 			times[i + 1] = times[i];
