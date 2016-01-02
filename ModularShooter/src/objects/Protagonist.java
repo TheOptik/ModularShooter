@@ -50,24 +50,7 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 	@Override
 	public void tick() {
 
-		double tempXCoord = this.coordinates.xCoordinate + velocity.xVelocity;
-		double tempYCoord = this.coordinates.yCoordinate + velocity.yVelocity;
-
-		if (tempXCoord < World.getWIDTH() - size && tempXCoord > 0) {
-			this.coordinates.xCoordinate = tempXCoord;
-		} else if (tempXCoord <= 0) {
-			this.coordinates.xCoordinate = 0;
-		} else {
-			this.coordinates.xCoordinate = (double) World.getWIDTH() - size;
-		}
-
-		if (tempYCoord < World.getHEIGHT() - size && tempYCoord > 0) {
-			this.coordinates.yCoordinate = tempYCoord;
-		} else if (tempYCoord <= 0) {
-			this.coordinates.yCoordinate = 0;
-		} else {
-			this.coordinates.yCoordinate = (double) World.getHEIGHT() - size;
-		}
+		handleBounds();
 
 		if (!(left || right)) {
 			this.velocity.xVelocity *= 0.9;
@@ -92,6 +75,27 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 			mod.tick();
 		}
 
+	}
+
+	private void handleBounds() {
+		double tempXCoord = this.coordinates.xCoordinate + velocity.xVelocity;
+		double tempYCoord = this.coordinates.yCoordinate + velocity.yVelocity;
+
+		if (tempXCoord < World.getWIDTH() - size && tempXCoord > 0) {
+			this.coordinates.xCoordinate = tempXCoord;
+		} else if (tempXCoord <= 0) {
+			this.coordinates.xCoordinate = 0;
+		} else {
+			this.coordinates.xCoordinate = (double) World.getWIDTH() - size;
+		}
+
+		if (tempYCoord < World.getHEIGHT() - size && tempYCoord > 0) {
+			this.coordinates.yCoordinate = tempYCoord;
+		} else if (tempYCoord <= 0) {
+			this.coordinates.yCoordinate = 0;
+		} else {
+			this.coordinates.yCoordinate = (double) World.getHEIGHT() - size;
+		}
 	}
 
 	public EventHandler<KeyEvent> getKeyPressed() {
