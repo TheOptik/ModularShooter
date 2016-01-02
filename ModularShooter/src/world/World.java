@@ -21,7 +21,6 @@ public class World {
 	private static final List<Drawable> DRAWABLES = new ArrayList<>();
 	private static final List<Hitable> HITABLES = new ArrayList<>();
 	private static long score = 0;
-	private static final boolean FULLSCREEN = true;
 
 	private World() {
 		// You shall not instantiate!
@@ -35,7 +34,6 @@ public class World {
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -2)));
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, -3)));
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -1)));
-
 	}
 
 	public static void trySpawning() {
@@ -98,10 +96,6 @@ public class World {
 
 	public static long getScore() {
 		return score;
-	}
-
-	public static boolean isFullScreen() {
-		return FULLSCREEN;
 	}
 
 }

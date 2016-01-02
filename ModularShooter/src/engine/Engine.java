@@ -32,10 +32,6 @@ public class Engine extends Application {
 		setupProtagonist();
 	}
 
-	public Engine() {
-		// You shall not instantiate!
-	}
-
 	public static void main(String[] args) {
 		if (args.length > 0) {
 			try {
@@ -62,7 +58,7 @@ public class Engine extends Application {
 
 	private static void setupStage(final Stage stage) {
 		stage.setTitle("Modular Shooter");
-		if (World.isFullScreen()) {
+		if (fullscreen) {
 			Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 			World.HEIGHT = (int) dim.getHeight();
 			World.WIDTH = (int) dim.getWidth();
