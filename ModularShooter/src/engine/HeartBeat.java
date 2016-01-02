@@ -23,7 +23,7 @@ public class HeartBeat extends AnimationTimer {
 		trackFPS(now);
 
 		World.trySpawning();
-		graphicalContext.clearRect(0, 0, World.WIDTH, World.HEIGHT);
+		graphicalContext.clearRect(0, 0, World.getWIDTH(), World.getHEIGHT());
 		World.PROTAGONIST.draw(graphicalContext);
 		World.PROTAGONIST.tick();
 		showData(graphicalContext);

@@ -27,6 +27,7 @@ public abstract class Enemy extends GameObject implements Tickable, Drawable, Hi
 		}
 	}
 
+	// TODO: Überarbeiten
 	@Override
 	public boolean hitTest(GameObject other) {
 		return coordinates.xCoordinate < other.coordinates.xCoordinate + other.size

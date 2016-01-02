@@ -21,8 +21,8 @@ public abstract class GameObject {
 	}
 
 	protected boolean isOutOfBounds() {
-		return this.coordinates.xCoordinate > World.WIDTH || this.coordinates.xCoordinate < 0
-				|| this.coordinates.yCoordinate > World.HEIGHT || this.coordinates.yCoordinate < 0;
+		return this.coordinates.xCoordinate > World.getWIDTH() || this.coordinates.xCoordinate < 0
+				|| this.coordinates.yCoordinate > World.getHEIGHT() || this.coordinates.yCoordinate < 0;
 
 	}
 }

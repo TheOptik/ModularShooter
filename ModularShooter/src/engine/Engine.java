@@ -60,13 +60,13 @@ public class Engine extends Application {
 		stage.setTitle("Modular Shooter");
 		if (fullscreen) {
 			Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-			World.HEIGHT = (int) dim.getHeight();
-			World.WIDTH = (int) dim.getWidth();
-			canvas.resize(World.WIDTH, World.HEIGHT);
+			World.setHEIGHT((int) dim.getHeight());
+			World.setWIDTH((int) dim.getWidth());
+			canvas.resize(World.getWIDTH(), World.getHEIGHT());
 			stage.setFullScreenExitHint("");
 			stage.setFullScreen(fullscreen);
-			World.PROTAGONIST.coordinates.xCoordinate = World.WIDTH / 2.0;
-			World.PROTAGONIST.coordinates.yCoordinate = World.HEIGHT / 2.0;
+			World.PROTAGONIST.coordinates.xCoordinate = World.getWIDTH() / 2.0;
+			World.PROTAGONIST.coordinates.yCoordinate = World.getHEIGHT() / 2.0;
 		}
 		stage.setScene(setupScene());
 		stage.show();
@@ -76,11 +76,11 @@ public class Engine extends Application {
 		Pane pane = new Pane();
 		pane.setStyle(" -fx-background-color: black");
 		pane.getChildren().add(canvas);
-		return new Scene(pane, World.WIDTH, World.HEIGHT);
+		return new Scene(pane, World.getWIDTH(), World.getHEIGHT());
 	}
 
 	private static void setupCanvas() {
-		canvas = new ResizableCanvas(World.WIDTH, World.HEIGHT);
+		canvas = new ResizableCanvas(World.getWIDTH(), World.getHEIGHT());
 		canvas.setFocusTraversable(true);
 		graphicalContext = canvas.getGraphicsContext2D();
 	}
@@ -100,7 +100,7 @@ public class Engine extends Application {
 			SnapshotParameters sp = new SnapshotParameters();
 			WritableImage image = canvas.snapshot(sp, null);
 			BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
-			File file = new File(path + World.WIDTH + "x" + World.HEIGHT + ".png");
+			File file = new File(path + World.getWIDTH() + "x" + World.getHEIGHT() + ".png");
 			ImageIO.write(bImage, "png", file);
 			System.out.println("DONE!"); // NOSONAR
 		} catch (Exception e) { // NOSONAR

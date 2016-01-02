@@ -13,8 +13,8 @@ import util.Hitable;
 import util.Tickable;
 
 public class World {
-	public static int WIDTH = 800; // TODO private mit gettern und settern >_>
-	public static int HEIGHT = 800;
+	private static int WIDTH = 800;
+	private static int HEIGHT = 800;
 	public static final Protagonist PROTAGONIST = new Protagonist();
 	public static final double SPAWN_PERCENTAGE = 10;
 	private static final List<Tickable> TICKABLES = new ArrayList<>();
@@ -96,6 +96,22 @@ public class World {
 
 	public static long getScore() {
 		return score;
+	}
+
+	public static int getWIDTH() {
+		return WIDTH;
+	}
+
+	public static void setWIDTH(int wIDTH) {
+		WIDTH = wIDTH;
+	}
+
+	public static int getHEIGHT() {
+		return HEIGHT;
+	}
+
+	public static void setHEIGHT(int hEIGHT) {
+		HEIGHT = hEIGHT;
 	}
 
 }

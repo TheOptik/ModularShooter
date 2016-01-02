@@ -34,6 +34,7 @@ public class BasicProjectile extends Projectile {
 			for (Hitable object : World.getAllHitableObjects()) {
 				if (object.hitTest(this)) {
 					object.hit();
+					World.removeObject(this);
 				}
 			}
 		}
