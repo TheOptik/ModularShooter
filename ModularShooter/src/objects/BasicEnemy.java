@@ -14,7 +14,7 @@ public class BasicEnemy extends Enemy {
 	}
 
 	public BasicEnemy() {
-		super(new Coordinates(Math.random() * World.WIDTH, Math.random() * World.HEIGHT));
+		super(new Coordinates(Math.random() * World.getWIDTH(), Math.random() * World.getHEIGHT()));
 	}
 
 	@Override

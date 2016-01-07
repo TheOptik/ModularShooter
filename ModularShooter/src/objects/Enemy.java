@@ -29,10 +29,12 @@ public abstract class Enemy extends GameObject implements Tickable, Drawable, Hi
 
 	@Override
 	public boolean hitTest(GameObject other) {
-		return coordinates.xCoordinate < other.coordinates.xCoordinate + other.size
-				&& coordinates.xCoordinate + size > other.coordinates.xCoordinate
-				&& coordinates.yCoordinate < other.coordinates.yCoordinate + other.size
+		boolean xCoordinateIsValid = coordinates.xCoordinate < other.coordinates.xCoordinate + other.size
+				&& coordinates.xCoordinate + size > other.coordinates.xCoordinate;
+		boolean yCoordinateIsValid = coordinates.yCoordinate < other.coordinates.yCoordinate + other.size
 				&& coordinates.yCoordinate + size > other.coordinates.yCoordinate;
+
+		return xCoordinateIsValid && yCoordinateIsValid;
 	}
 
 	@Override

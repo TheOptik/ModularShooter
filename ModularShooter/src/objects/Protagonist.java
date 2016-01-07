@@ -3,6 +3,7 @@ package objects;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
@@ -28,7 +29,7 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 
 	public Protagonist() {
 		this.size = 5;
-		this.coordinates = new Coordinates(World.WIDTH / 2, World.HEIGHT / 2);
+		this.coordinates = new Coordinates(World.getWIDTH() / 2, World.getHEIGHT() / 2);
 		this.velocity = new Velocity(0, 0);
 
 		keyPressed = generateKeyPressedEventhandler();
@@ -49,8 +50,7 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 	@Override
 	public void tick() {
 
-		this.coordinates.xCoordinate += velocity.xVelocity;
-		this.coordinates.yCoordinate += velocity.yVelocity;
+		handleBounds();
 
 		if (!(left || right)) {
 			this.velocity.xVelocity *= 0.9;
@@ -77,6 +77,27 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 
 	}
 
+	private void handleBounds() {
+		double tempXCoord = this.coordinates.xCoordinate + velocity.xVelocity;
+		double tempYCoord = this.coordinates.yCoordinate + velocity.yVelocity;
+
+		if (tempXCoord < World.getWIDTH() - size && tempXCoord > 0) {
+			this.coordinates.xCoordinate = tempXCoord;
+		} else if (tempXCoord <= 0) {
+			this.coordinates.xCoordinate = 0;
+		} else {
+			this.coordinates.xCoordinate = (double) World.getWIDTH() - size;
+		}
+
+		if (tempYCoord < World.getHEIGHT() - size && tempYCoord > 0) {
+			this.coordinates.yCoordinate = tempYCoord;
+		} else if (tempYCoord <= 0) {
+			this.coordinates.yCoordinate = 0;
+		} else {
+			this.coordinates.yCoordinate = (double) World.getHEIGHT() - size;
+		}
+	}
+
 	public EventHandler<KeyEvent> getKeyPressed() {
 		return keyPressed;
 	}
@@ -94,6 +115,10 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 
 			@Override
 			public void handle(final KeyEvent event) {
+				if (event.isAltDown() && event.getCode() == KeyCode.F4) {
+					Platform.exit();
+				}
+
 				if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.W) {
 					Protagonist.this.velocity.yVelocity = -1;
 					up = true;

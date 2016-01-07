@@ -13,15 +13,14 @@ import util.Hitable;
 import util.Tickable;
 
 public class World {
-	public static int WIDTH = 800; // TODO private mit gettern und settern >_>
-	public static int HEIGHT = 800;
+	private static int WIDTH = 800;
+	private static int HEIGHT = 800;
 	public static final Protagonist PROTAGONIST = new Protagonist();
 	public static final double SPAWN_PERCENTAGE = 10;
 	private static final List<Tickable> TICKABLES = new ArrayList<>();
 	private static final List<Drawable> DRAWABLES = new ArrayList<>();
 	private static final List<Hitable> HITABLES = new ArrayList<>();
 	private static long score = 0;
-	private static final boolean FULLSCREEN = true;
 
 	private World() {
 		// You shall not instantiate!
@@ -35,7 +34,6 @@ public class World {
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -2)));
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, -3)));
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -1)));
-
 	}
 
 	public static void trySpawning() {
@@ -100,8 +98,20 @@ public class World {
 		return score;
 	}
 
-	public static boolean isFullScreen() {
-		return FULLSCREEN;
+	public static int getWIDTH() {
+		return WIDTH;
+	}
+
+	public static void setWIDTH(int wIDTH) {
+		WIDTH = wIDTH;
+	}
+
+	public static int getHEIGHT() {
+		return HEIGHT;
+	}
+
+	public static void setHEIGHT(int hEIGHT) {
+		HEIGHT = hEIGHT;
 	}
 
 }
