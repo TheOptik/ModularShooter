@@ -61,8 +61,8 @@ public class Engine extends Application {
 			canvas.resize(World.WIDTH, World.HEIGHT);
 			stage.setFullScreenExitHint("");
 			stage.setFullScreen(true);
-			World.PROTAGONIST.coordinates.xCoordinate = World.WIDTH / 2;
-			World.PROTAGONIST.coordinates.yCoordinate = World.HEIGHT / 2;
+			World.PROTAGONIST.coordinates.xCoordinate = World.WIDTH / 2.0;
+			World.PROTAGONIST.coordinates.yCoordinate = World.HEIGHT / 2.0;
 		}
 		stage.setScene(setupScene());
 		stage.show();
