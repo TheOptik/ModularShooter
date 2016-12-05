@@ -8,7 +8,7 @@ public abstract class GameObject {
 
 	public Coordinates coordinates;
 	protected Velocity velocity;
-	protected int size;
+	protected int size = 5;
 
 	protected Velocity randomVelocity() {
 
@@ -24,5 +24,9 @@ public abstract class GameObject {
 		return this.coordinates.xCoordinate > World.getWIDTH() || this.coordinates.xCoordinate < 0
 				|| this.coordinates.yCoordinate > World.getHEIGHT() || this.coordinates.yCoordinate < 0;
 
+	}
+
+	public int getSize() {
+		return size;
 	}
 }

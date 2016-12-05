@@ -10,8 +10,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import modules.Module;
+import util.Collectable;
 import util.Coordinates;
 import util.Drawable;
+import util.Hitable;
 import util.Tickable;
 import util.Velocity;
 import world.World;
@@ -71,10 +73,34 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 			this.velocity.yVelocity = -1;
 		}
 
-		for (Module mod : Protagonist.MODULES) {
-			mod.tick();
+		for (Collectable collectable : World.getAllCollectableObjects()) {
+			if (collectable.hitTest(this)) {
+				Module module = collectable.collect();
+				module.protagonist = this;
+				module.relativePosition = module.coordinates.subtract(this.coordinates).divide(5).round();
+				this.addModule(module);
+			}
 		}
 
+		List<Module> moduleCopy = new ArrayList<>();
+		moduleCopy.addAll(Protagonist.MODULES);
+		for (Module mod : moduleCopy) {
+			mod.tick();
+			for (Collectable collectable : World.getAllCollectableObjects()) {
+				if (collectable.hitTest(mod)) {
+					Module module = collectable.collect();
+					module.protagonist = this;
+					module.relativePosition = module.coordinates.subtract(this.coordinates).divide(5).round();
+					this.addModule(module);
+				}
+			}
+			for (Hitable hitable : World.getAllHitableObjects()) {
+				if (hitable.hitTest(mod)) {
+					hitable.hit();
+					MODULES.remove(mod);
+				}
+			}
+		}
 	}
 
 	private void handleBounds() {

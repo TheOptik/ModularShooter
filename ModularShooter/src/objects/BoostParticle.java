@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import util.Velocity;
 
 public class BoostParticle extends ParticleEffect {
-	int maxLifeSpan;
+	private int maxLifeSpan;
 
 	public BoostParticle(double xCoordinate, double yCoordinate, Velocity velocity) {
 		super(xCoordinate, yCoordinate);

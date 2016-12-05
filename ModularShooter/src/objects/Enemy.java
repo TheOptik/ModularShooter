@@ -1,5 +1,7 @@
 package objects;
 
+import modules.BasicWeapon;
+import modules.DroppedModule;
 import util.Coordinates;
 import util.Drawable;
 import util.Hitable;
@@ -41,6 +43,11 @@ public abstract class Enemy extends GameObject implements Tickable, Drawable, Hi
 	public void hit() {
 		World.addScore(10);
 		World.removeObject(this);
+		if(Math.random() <= World.DROP_PERCENTAGE/100){
+		World.addObject(new DroppedModule(new BasicWeapon(this.coordinates)));
+		}
 	}
+
+	protected abstract void generateRandomBoostParticle();
 
 }

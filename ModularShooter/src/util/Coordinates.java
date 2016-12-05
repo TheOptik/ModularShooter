@@ -15,4 +15,31 @@ public class Coordinates {
 		this.yCoordinate += velocity.yVelocity;
 
 	}
+
+	public Coordinates multiply(int multiplier) {
+		return new Coordinates(xCoordinate * multiplier, yCoordinate * multiplier);
+	}
+
+	public Coordinates subtract(Coordinates coordinates) {
+		return new Coordinates(xCoordinate - coordinates.xCoordinate, yCoordinate - coordinates.yCoordinate);
+	}
+
+	public Coordinates add(Coordinates coordinates) {
+		return new Coordinates(xCoordinate + coordinates.xCoordinate, yCoordinate + coordinates.yCoordinate);
+	}
+
+	@Override
+	public String toString() {
+		return xCoordinate + " : " + yCoordinate;
+	}
+
+	public Coordinates divide(int divisor) {
+		return new Coordinates(xCoordinate / divisor, yCoordinate / divisor);
+	}
+
+	public Coordinates round() {
+		return new Coordinates((int) (xCoordinate + 0.5 * Math.signum(xCoordinate)),
+				(int) (yCoordinate + 0.5 * Math.signum(yCoordinate)));
+	}
+
 }

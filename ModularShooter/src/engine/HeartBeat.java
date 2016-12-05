@@ -10,8 +10,9 @@ import world.World;
 public class HeartBeat extends AnimationTimer {
 
 	private static GraphicsContext graphicalContext;
-	private static long[] times = new long[10];
+	private static final long[] times = new long[10];
 	private static int fps = 0;
+	private static long last;
 
 	public HeartBeat(GraphicsContext graphicalContext) {
 		HeartBeat.graphicalContext = graphicalContext;
@@ -39,7 +40,7 @@ public class HeartBeat extends AnimationTimer {
 
 		graphicalContext.setFill(Color.GREEN);
 		graphicalContext.fillText("Score:  ".concat(Long.toString(World.getScore())), 10, 15);
-		graphicalContext.fillText("FPS:     ".concat(Integer.toString(fps / 1000000)), 10, 30);
+		graphicalContext.fillText("FPS:     ".concat(Integer.toString((int) (1 / (fps / 1000000000.0)))), 10, 30);
 		graphicalContext.fillText("#Objc:  ".concat(Integer.toString(World.getObjectCount())), 10, 45);
 
 	}
@@ -53,8 +54,8 @@ public class HeartBeat extends AnimationTimer {
 		for (int i = 0; i < times.length - 1; i++) {
 			times[i + 1] = times[i];
 		}
-		times[0] = now;
+		times[0] = now - last;
 		fps /= 10;
-
+		last = now;
 	}
 }

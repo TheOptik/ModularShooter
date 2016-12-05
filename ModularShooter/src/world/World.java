@@ -7,19 +7,22 @@ import modules.BasicWeapon;
 import objects.Enemy;
 import objects.GameObject;
 import objects.Protagonist;
+import util.Collectable;
 import util.Coordinates;
 import util.Drawable;
 import util.Hitable;
 import util.Tickable;
 
 public class World {
-	private static int WIDTH = 800;
-	private static int HEIGHT = 800;
+	private static int width = 800;
+	private static int height = 800;
 	public static final Protagonist PROTAGONIST = new Protagonist();
 	public static final double SPAWN_PERCENTAGE = 10;
 	private static final List<Tickable> TICKABLES = new ArrayList<>();
 	private static final List<Drawable> DRAWABLES = new ArrayList<>();
 	private static final List<Hitable> HITABLES = new ArrayList<>();
+	private static final List<Collectable> COLLECTABLES = new ArrayList<>();
+	public static final double DROP_PERCENTAGE = 10;
 	private static long score = 0;
 
 	private World() {
@@ -27,13 +30,13 @@ public class World {
 	}
 
 	static {
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(-1, -1)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, -1)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -1)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, -2)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -2)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, -3)));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -1)));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(-1, -1), PROTAGONIST));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, -1), PROTAGONIST));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -1), PROTAGONIST));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, -2), PROTAGONIST));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -2), PROTAGONIST));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, -3), PROTAGONIST));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -1), PROTAGONIST));
 	}
 
 	public static void trySpawning() {
@@ -62,6 +65,12 @@ public class World {
 		return copy;
 	}
 
+	public static List<Collectable> getAllCollectableObjects() {
+		List<Collectable> copy = new ArrayList<>();
+		copy.addAll(COLLECTABLES);
+		return copy;
+	}
+
 	public static void addObject(GameObject object) {
 		if (object instanceof Drawable) {
 			DRAWABLES.add((Drawable) object);
@@ -71,6 +80,9 @@ public class World {
 		}
 		if (object instanceof Hitable) {
 			HITABLES.add((Hitable) object);
+		}
+		if (object instanceof Collectable) {
+			COLLECTABLES.add((Collectable) object);
 		}
 	}
 
@@ -83,6 +95,9 @@ public class World {
 		}
 		if (object instanceof Hitable) {
 			HITABLES.remove((Hitable) object);
+		}
+		if (object instanceof Collectable) {
+			COLLECTABLES.remove((Collectable) object);
 		}
 	}
 
@@ -99,19 +114,19 @@ public class World {
 	}
 
 	public static int getWIDTH() {
-		return WIDTH;
+		return width;
 	}
 
-	public static void setWIDTH(int wIDTH) {
-		WIDTH = wIDTH;
+	public static void setWIDTH(int width) {
+		World.width = width;
 	}
 
 	public static int getHEIGHT() {
-		return HEIGHT;
+		return height;
 	}
 
-	public static void setHEIGHT(int hEIGHT) {
-		HEIGHT = hEIGHT;
+	public static void setHEIGHT(int height) {
+		World.height = height;
 	}
 
 }

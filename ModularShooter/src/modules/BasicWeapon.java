@@ -2,6 +2,7 @@ package modules;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import objects.Protagonist;
 import projectiles.BasicProjectile;
 import util.Coordinates;
 import util.Velocity;
@@ -9,6 +10,7 @@ import world.World;
 
 public class BasicWeapon extends Module {
 
+	private static final double BULLET_SPEED = 2;
 	private int cooldown = 80;
 	private int defaultCooldown = cooldown;
 
@@ -16,15 +18,20 @@ public class BasicWeapon extends Module {
 		super(relativePosition);
 	}
 
+	public BasicWeapon(Coordinates relativePosition, Protagonist protagonist) {
+		super(relativePosition, protagonist);
+	}
+
 	@Override
 	public void draw(GraphicsContext graphicsContext) {
 		graphicsContext.setFill(Color.YELLOW);
-		graphicsContext.fillRect(calculateXCoordinate(), calculateYCoordinate(), 5, 5);
+		graphicsContext.fillRect(calculateXCoordinate(), calculateYCoordinate(), size, size);
 
 	}
 
 	@Override
 	public void tick() {
+		super.tick();
 		if (cooldown <= 0) {
 			shoot();
 			cooldown = defaultCooldown;
@@ -33,30 +40,38 @@ public class BasicWeapon extends Module {
 	}
 
 	private double calculateXCoordinate() {
-		return World.PROTAGONIST.coordinates.xCoordinate + relativePosition.xCoordinate * 5;
+		if (protagonist != null) {
+			return World.PROTAGONIST.coordinates.xCoordinate + relativePosition.xCoordinate * size;
+		} else {
+			return coordinates.xCoordinate;
+		}
 	}
 
 	private double calculateYCoordinate() {
-		return World.PROTAGONIST.coordinates.yCoordinate + relativePosition.yCoordinate * 5;
+		if (protagonist != null) {
+			return World.PROTAGONIST.coordinates.yCoordinate + relativePosition.yCoordinate * size;
+		} else {
+			return coordinates.yCoordinate;
+		}
 	}
 
-	private void shoot() { //TODO wow, das ist..... unleserlich wie sau.
+	private void shoot() { // TODO wow, das ist..... unleserlich wie sau.
 
 		if ((int) relativePosition.yCoordinate != 0) {
 			if ((int) relativePosition.xCoordinate != 0) {
 				double absoluteVectorLength = Math
 						.sqrt(Math.pow(relativePosition.xCoordinate, 2) + Math.pow(relativePosition.yCoordinate, 2));
-				double xVel = relativePosition.xCoordinate / absoluteVectorLength;
-				double yVel = relativePosition.yCoordinate / absoluteVectorLength;
+				double xVel = relativePosition.xCoordinate / absoluteVectorLength * BULLET_SPEED;
+				double yVel = relativePosition.yCoordinate / absoluteVectorLength * BULLET_SPEED;
 				World.addObject(new BasicProjectile(calculateAbsoluteCoordinates(), new Velocity(xVel, yVel), true));
 			} else {
 				World.addObject(new BasicProjectile(calculateAbsoluteCoordinates(),
-						new Velocity(0, Math.signum(relativePosition.yCoordinate)), true));
+						new Velocity(0, Math.signum(relativePosition.yCoordinate) * BULLET_SPEED), true));
 			}
 		} else {
 			if ((int) relativePosition.xCoordinate != 0) {
 				World.addObject(new BasicProjectile(calculateAbsoluteCoordinates(),
-						new Velocity(Math.signum(relativePosition.xCoordinate), 0), true));
+						new Velocity(Math.signum(relativePosition.xCoordinate) * BULLET_SPEED, 0), true));
 			}
 		}
 

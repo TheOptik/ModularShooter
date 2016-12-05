@@ -1,5 +1,7 @@
 package objects;
 
+import java.util.Random;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import util.Coordinates;
@@ -8,6 +10,7 @@ import world.World;
 public class BasicEnemy extends Enemy {
 
 	private boolean boostParticles = false;
+	private static Random random = new Random();
 
 	public BasicEnemy(Coordinates coordinates) {
 		super(coordinates);
@@ -19,6 +22,7 @@ public class BasicEnemy extends Enemy {
 
 	@Override
 	public void tick() {
+		super.tick();
 		this.coordinates.xCoordinate += this.velocity.xVelocity;
 		this.coordinates.yCoordinate += this.velocity.yVelocity;
 
@@ -37,7 +41,7 @@ public class BasicEnemy extends Enemy {
 		graphicsContext.setFill(Color.RED);
 		graphicsContext.fillRect(this.coordinates.xCoordinate, this.coordinates.yCoordinate, 5, 5);
 		if (boostParticles) {
-			for (int i = 0; i < (int) (Math.random() * 6 + 3); i++) {
+			for (int i = 0; i < (random.nextInt(4) * 3); i++) {
 				generateRandomBoostParticle();
 			}
 			boostParticles = false;
@@ -45,7 +49,8 @@ public class BasicEnemy extends Enemy {
 
 	}
 
-	public void generateRandomBoostParticle() {
+	@Override
+	protected void generateRandomBoostParticle() {
 		World.addObject(new BoostParticle(this.coordinates.xCoordinate + (Math.random() - 0.5) * 15,
 				this.coordinates.yCoordinate + (Math.random() - 0.5) * 15, this.velocity));
 	}
