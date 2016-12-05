@@ -7,20 +7,20 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class AppletTry extends Application {
-
+	
 	public static void main(String[] args) {
 		launch();
 	}
-
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
-		Canvas canvas = new Canvas(1000, 1000);
-		GridPane grid = new GridPane();
+		
+		final Canvas canvas = new Canvas(1000, 1000);
+		final GridPane grid = new GridPane();
 		grid.getChildren().add(canvas);
-
+		
 		primaryStage.setScene(new Scene(grid));
 		primaryStage.show();
 	}
-
+	
 }

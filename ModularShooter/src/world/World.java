@@ -24,11 +24,11 @@ public class World {
 	private static final List<Collectable> COLLECTABLES = new ArrayList<>();
 	public static final double DROP_PERCENTAGE = 10;
 	private static long score = 0;
-
+	
 	private World() {
 		// You shall not instantiate!
 	}
-
+	
 	static {
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(-1, -1), PROTAGONIST));
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, -1), PROTAGONIST));
@@ -38,39 +38,39 @@ public class World {
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, -3), PROTAGONIST));
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -1), PROTAGONIST));
 	}
-
+	
 	public static void trySpawning() {
-
+		
 		if (Math.random() <= SPAWN_PERCENTAGE / 100) {
 			addObject(Enemy.createRandomEnemy());
 		}
-
+		
 	}
-
+	
 	public static List<Tickable> getAllTickableObjects() {
-		List<Tickable> copy = new ArrayList<>();
+		final List<Tickable> copy = new ArrayList<>();
 		copy.addAll(TICKABLES);
 		return copy;
 	}
-
+	
 	public static List<Drawable> getAllDrawableObjects() {
-		List<Drawable> copy = new ArrayList<>();
+		final List<Drawable> copy = new ArrayList<>();
 		copy.addAll(DRAWABLES);
 		return copy;
 	}
-
+	
 	public static List<Hitable> getAllHitableObjects() {
-		List<Hitable> copy = new ArrayList<>();
+		final List<Hitable> copy = new ArrayList<>();
 		copy.addAll(HITABLES);
 		return copy;
 	}
-
+	
 	public static List<Collectable> getAllCollectableObjects() {
-		List<Collectable> copy = new ArrayList<>();
+		final List<Collectable> copy = new ArrayList<>();
 		copy.addAll(COLLECTABLES);
 		return copy;
 	}
-
+	
 	public static void addObject(GameObject object) {
 		if (object instanceof Drawable) {
 			DRAWABLES.add((Drawable) object);
@@ -85,48 +85,48 @@ public class World {
 			COLLECTABLES.add((Collectable) object);
 		}
 	}
-
+	
 	public static void removeObject(GameObject object) {
 		if (object instanceof Drawable) {
-			DRAWABLES.remove((Drawable) object);
+			DRAWABLES.remove(object);
 		}
 		if (object instanceof Tickable) {
-			TICKABLES.remove((Tickable) object);
+			TICKABLES.remove(object);
 		}
 		if (object instanceof Hitable) {
-			HITABLES.remove((Hitable) object);
+			HITABLES.remove(object);
 		}
 		if (object instanceof Collectable) {
-			COLLECTABLES.remove((Collectable) object);
+			COLLECTABLES.remove(object);
 		}
 	}
-
+	
 	public static int getObjectCount() {
 		return HITABLES.size() + DRAWABLES.size() + TICKABLES.size();
 	}
-
+	
 	public static void addScore(int amount) {
 		score += amount;
 	}
-
+	
 	public static long getScore() {
 		return score;
 	}
-
+	
 	public static int getWIDTH() {
 		return width;
 	}
-
+	
 	public static void setWIDTH(int width) {
 		World.width = width;
 	}
-
+	
 	public static int getHEIGHT() {
 		return height;
 	}
-
+	
 	public static void setHEIGHT(int height) {
 		World.height = height;
 	}
-
+	
 }
