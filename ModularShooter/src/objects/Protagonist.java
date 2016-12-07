@@ -3,6 +3,7 @@ package objects;
 import java.util.ArrayList;
 import java.util.List;
 
+import engine.HeartBeat;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
@@ -89,12 +90,13 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 	}
 	
 	private void hitAllHitablesInReach(Module module) {
-		for (final Hitable hitable : World.getAllHitableObjects()) {
+		for (Hitable hitable : World.getAllHitableObjects()) {
 			if (hitable.hitTest(module)) {
 				hitable.hit();
 				MODULES.remove(module);
 			}
 		}
+		
 	}
 	
 	private void collectAllCollectablesInModuleReach(Module mod) {
@@ -120,8 +122,8 @@ public class Protagonist extends GameObject implements Tickable, Drawable {
 	}
 	
 	private void handleBounds() {
-		final double tempXCoord = this.coordinates.xCoordinate + velocity.xVelocity;
-		final double tempYCoord = this.coordinates.yCoordinate + velocity.yVelocity;
+		final double tempXCoord = this.coordinates.xCoordinate + velocity.xVelocity * HeartBeat.getDeltaTime();
+		final double tempYCoord = this.coordinates.yCoordinate + velocity.yVelocity * HeartBeat.getDeltaTime();
 		
 		if (tempXCoord < World.getWIDTH() - size && tempXCoord > 0) {
 			this.coordinates.xCoordinate = tempXCoord;

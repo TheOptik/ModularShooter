@@ -2,6 +2,7 @@ package objects;
 
 import java.util.Random;
 
+import engine.HeartBeat;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import util.Coordinates;
@@ -23,8 +24,8 @@ public class BasicEnemy extends Enemy {
 	@Override
 	public void tick() {
 		super.tick();
-		this.coordinates.xCoordinate += this.velocity.xVelocity;
-		this.coordinates.yCoordinate += this.velocity.yVelocity;
+		this.coordinates.xCoordinate += this.velocity.xVelocity * HeartBeat.getDeltaTime();
+		this.coordinates.yCoordinate += this.velocity.yVelocity * HeartBeat.getDeltaTime();
 		
 		this.velocity.xVelocity *= 0.995;
 		this.velocity.yVelocity *= 0.995;

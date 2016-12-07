@@ -17,12 +17,12 @@ public class World {
 	private static int width = 800;
 	private static int height = 800;
 	public static final Protagonist PROTAGONIST = new Protagonist();
-	public static final double SPAWN_PERCENTAGE = 10;
+	public static final double SPAWN_PERCENTAGE = 100;
 	private static final List<Tickable> TICKABLES = new ArrayList<>();
 	private static final List<Drawable> DRAWABLES = new ArrayList<>();
 	private static final List<Hitable> HITABLES = new ArrayList<>();
 	private static final List<Collectable> COLLECTABLES = new ArrayList<>();
-	public static final double DROP_PERCENTAGE = 10;
+	public static final double DROP_PERCENTAGE = 100;
 	private static long score = 0;
 	
 	private World() {
@@ -30,13 +30,15 @@ public class World {
 	}
 	
 	static {
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(-1, -1), PROTAGONIST));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, -1), PROTAGONIST));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -1), PROTAGONIST));
 		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, -2), PROTAGONIST));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -2), PROTAGONIST));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, -3), PROTAGONIST));
-		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, -1), PROTAGONIST));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, -1), PROTAGONIST));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(0, 1), PROTAGONIST));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(1, 0), PROTAGONIST));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(-1, 0), PROTAGONIST));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(2, 0), PROTAGONIST));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(-2, 0), PROTAGONIST));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(2, -1), PROTAGONIST));
+		PROTAGONIST.addModule(new BasicWeapon(new Coordinates(-2, -1), PROTAGONIST));
 	}
 	
 	public static void trySpawning() {
