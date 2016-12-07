@@ -1,5 +1,6 @@
-package objects;
+package objects.particleEffects;
 
+import objects.GameObject;
 import util.Coordinates;
 import util.Drawable;
 import util.Tickable;

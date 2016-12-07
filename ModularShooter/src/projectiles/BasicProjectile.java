@@ -8,18 +8,18 @@ import util.Velocity;
 import world.World;
 
 public class BasicProjectile extends Projectile {
-	
+
 	public BasicProjectile(Coordinates coordinates, Velocity velocity, boolean friendly) {
 		super(coordinates, velocity, friendly);
 		this.size = 3;
 	}
-	
+
 	@Override
 	public void draw(GraphicsContext graphicsContext) {
 		graphicsContext.setFill(Color.WHITE);
 		graphicsContext.fillRect(this.coordinates.xCoordinate, this.coordinates.yCoordinate, size, size);
 	}
-	
+
 	@Override
 	public void tick() {
 		if (isOutOfBounds()) {
@@ -39,5 +39,5 @@ public class BasicProjectile extends Projectile {
 			}
 		}
 	}
-	
+
 }

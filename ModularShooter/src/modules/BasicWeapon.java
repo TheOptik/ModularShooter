@@ -10,26 +10,26 @@ import util.Velocity;
 import world.World;
 
 public class BasicWeapon extends Module {
-	
+
 	private static final double BULLET_SPEED = 2;
 	private int cooldown = 80;
 	private final int defaultCooldown = cooldown;
-	
+
 	public BasicWeapon(Coordinates relativePosition) {
 		super(relativePosition);
 	}
-	
+
 	public BasicWeapon(Coordinates relativePosition, Protagonist protagonist) {
 		super(relativePosition, protagonist);
 	}
-	
+
 	@Override
 	public void draw(GraphicsContext graphicsContext) {
 		graphicsContext.setFill(Color.YELLOW);
 		graphicsContext.fillRect(calculateXCoordinate(), calculateYCoordinate(), size, size);
-		
+
 	}
-	
+
 	@Override
 	public void tick() {
 		super.tick();
@@ -39,25 +39,9 @@ public class BasicWeapon extends Module {
 		}
 		cooldown -= HeartBeat.getDeltaTime();
 	}
-	
-	private double calculateXCoordinate() {
-		if (protagonist != null) {
-			return World.PROTAGONIST.coordinates.xCoordinate + relativePosition.xCoordinate * size;
-		} else {
-			return coordinates.xCoordinate;
-		}
-	}
-	
-	private double calculateYCoordinate() {
-		if (protagonist != null) {
-			return World.PROTAGONIST.coordinates.yCoordinate + relativePosition.yCoordinate * size;
-		} else {
-			return coordinates.yCoordinate;
-		}
-	}
-	
+
 	private void shoot() { // TODO wow, das ist..... unleserlich wie sau.
-		
+
 		if ((int) relativePosition.yCoordinate != 0) {
 			if ((int) relativePosition.xCoordinate != 0) {
 				final double absoluteVectorLength = Math
@@ -75,11 +59,16 @@ public class BasicWeapon extends Module {
 						new Velocity(Math.signum(relativePosition.xCoordinate) * BULLET_SPEED, 0), true));
 			}
 		}
-		
+
 	}
-	
+
 	private Coordinates calculateAbsoluteCoordinates() {
 		return new Coordinates(calculateXCoordinate(), calculateYCoordinate());
 	}
-	
+
+	@Override
+	public void hit() {
+		World.PROTAGONIST.removeModule(this);
+	}
+
 }
