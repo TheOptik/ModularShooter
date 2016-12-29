@@ -12,10 +12,10 @@ import util.Tickable;
 import world.World;
 
 public class Sentury extends GameObject implements Tickable, Drawable {
-
+	
 	private static final int blastPower = 25;
 	private static final int minimalDistance = 5;
-	private static final float maxVisibility = 0.2f;
+	private static final float maxVisibility = 0.3f;
 	private int distance;
 	private double angle;
 	private Color color;
@@ -23,7 +23,7 @@ public class Sentury extends GameObject implements Tickable, Drawable {
 	private SenturyModule senturyModule;
 	private float visibility = maxVisibility;
 	private float visibilityStep = -0.003f;
-
+	
 	public Sentury(SenturyModule senturyModule) {
 		this.senturyModule = senturyModule;
 		distance = (int) ((senturyModule.relativePosition.magnitude() + minimalDistance) * size);
@@ -32,7 +32,7 @@ public class Sentury extends GameObject implements Tickable, Drawable {
 		this.coordinates = new Coordinates(World.PROTAGONIST.coordinates.xCoordinate + World.PROTAGONIST.size / 2.0,
 				World.PROTAGONIST.coordinates.yCoordinate + World.PROTAGONIST.size / 2.0);
 	}
-
+	
 	@Override
 	public void draw(GraphicsContext graphicsContext) {
 		lineColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), visibility);
@@ -43,19 +43,19 @@ public class Sentury extends GameObject implements Tickable, Drawable {
 		strokeOrbit(graphicsContext, x, y);
 		drawSentury(graphicsContext);
 	}
-
+	
 	private void drawSentury(GraphicsContext graphicsContext) {
 		graphicsContext.setFill(color);
 		graphicsContext.fillRect(coordinates.xCoordinate - size / 2.0, coordinates.yCoordinate - size / 2.0, size,
 				size);
 	}
-
+	
 	private void strokeOrbit(GraphicsContext graphicsContext, double x, double y) {
 		double radius = distance * 2;
 		graphicsContext.setStroke(lineColor);
 		graphicsContext.strokeOval(x - radius / 2, y - radius / 2, radius, radius);
 	}
-
+	
 	@Override
 	public void tick() {
 		angle += (1.0 / distance) * HeartBeat.getDeltaTime();
@@ -72,9 +72,9 @@ public class Sentury extends GameObject implements Tickable, Drawable {
 				setOffExplosion();
 			}
 		}
-
+		
 	}
-
+	
 	private void setOffExplosion() {
 		Explosion explosion = new Explosion(blastPower * 10, coordinates);
 		World.addObject(explosion);
@@ -86,5 +86,5 @@ public class Sentury extends GameObject implements Tickable, Drawable {
 			}
 		}
 	}
-
+	
 }
