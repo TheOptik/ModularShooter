@@ -1,5 +1,7 @@
 package objects.particleEffects;
 
+import java.util.Random;
+
 import objects.GameObject;
 import util.Coordinates;
 import util.Drawable;
@@ -10,9 +12,11 @@ public abstract class ParticleEffect extends GameObject implements Drawable, Tic
 	
 	protected int lifeSpan;
 	
+	protected static final Random random = new Random();
+	
 	public ParticleEffect(double xCoordinate, double yCoordinate) {
 		this.coordinates = new Coordinates(xCoordinate, yCoordinate);
-		this.lifeSpan = (int) (60 * Math.random()) + 1;
+		this.lifeSpan = random.nextInt(60);
 	}
 	
 	@Override

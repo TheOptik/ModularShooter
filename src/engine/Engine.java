@@ -2,19 +2,11 @@ package engine;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.File;
-
-import javax.imageio.ImageIO;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import util.ResizableCanvas;
@@ -90,22 +82,6 @@ public class Engine extends Application {
 		timer = new HeartBeat(graphicalContext);
 		timer.start();
 		
-	}
-	
-	@SuppressWarnings("unused")
-	private static void printCanvas(Canvas canvas) { // NOSONAR
-		try {
-			final String path = "C:/Users/shu/Desktop/";
-			System.out.println("Exporting Image"); // NOSONAR
-			final SnapshotParameters sp = new SnapshotParameters();
-			final WritableImage image = canvas.snapshot(sp, null);
-			final BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
-			final File file = new File(path + World.getWIDTH() + "x" + World.getHEIGHT() + ".png");
-			ImageIO.write(bImage, "png", file);
-			System.out.println("DONE!"); // NOSONAR
-		} catch (final Exception e) { // NOSONAR
-		
-		}
 	}
 	
 }

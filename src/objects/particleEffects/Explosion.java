@@ -6,23 +6,23 @@ import util.Coordinates;
 import world.World;
 
 public class Explosion extends ParticleEffect {
-
+	
 	private Color color = Color.RED;
 	private static final int maxLifeSpan = 100;
 	private int lifeSpan;
-
+	
 	public Explosion(int size, Coordinates coordinates) {
-		super(coordinates.xCoordinate - size / 2, coordinates.yCoordinate - size / 2);
+		super(coordinates.xCoordinate - size / 2.0, coordinates.yCoordinate - size / 2.0);
 		this.size = size;
 		this.lifeSpan = maxLifeSpan;
 	}
-
+	
 	@Override
 	public void draw(GraphicsContext graphicsContext) {
 		graphicsContext.setFill(color);
 		graphicsContext.fillRect(coordinates.xCoordinate, coordinates.yCoordinate, size, size);
 	}
-
+	
 	@Override
 	public void tick() {
 		double alpha = Math.abs(lifeSpan / (double) maxLifeSpan);
@@ -32,5 +32,5 @@ public class Explosion extends ParticleEffect {
 		}
 		lifeSpan--;
 	}
-
+	
 }
